@@ -188,41 +188,11 @@ const Index = () => {
         </div>
       </header>
 
-      <section className="relative py-20 px-4 text-center bg-gradient-to-r from-primary/10 via-accent/10 to-secondary/10 animate-fade-in overflow-hidden">
-        <div className="absolute left-0 bottom-0 w-48 md:w-64 opacity-90 animate-scale-in pointer-events-none z-0">
-          <img 
-            src="https://cdn.poehali.dev/files/bc49f650-a6d4-4625-aff7-38a45c10e8f3.jpg" 
-            alt="Фиксики"
-            className="w-full h-auto"
-            style={{ animationDelay: '0.3s' }}
-          />
-        </div>
-        
-        <div className="absolute right-0 bottom-0 w-48 md:w-64 opacity-90 animate-scale-in pointer-events-none z-0">
-          <img 
-            src="https://cdn.poehali.dev/files/d8af0c87-3a62-410a-9a3f-353773fcbcb0.jpg" 
-            alt="Дедпул"
-            className="w-full h-auto"
-            style={{ animationDelay: '0.5s' }}
-          />
-        </div>
-
-        <div className="absolute left-1/4 bottom-0 w-40 md:w-56 opacity-80 animate-scale-in pointer-events-none z-0 hidden lg:block">
-          <img 
-            src="https://cdn.poehali.dev/files/59114da6-2fb2-4791-aed5-8bd9243588f4.jpg" 
-            alt="Барби и Кен"
-            className="w-full h-auto"
-            style={{ animationDelay: '0.4s' }}
-          />
-        </div>
-
-        <div className="absolute right-1/4 bottom-0 w-40 md:w-56 opacity-80 animate-scale-in pointer-events-none z-0 hidden lg:block">
-          <img 
-            src="https://cdn.poehali.dev/files/62b73ddb-43c7-42af-aeae-8daa52887936.jpg" 
-            alt="Аниме персонажи"
-            className="w-full h-auto"
-            style={{ animationDelay: '0.6s' }}
-          />
+      <section className="relative py-20 px-4 text-center bg-gradient-to-br from-pink-100 via-purple-100 to-orange-100 animate-fade-in overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-primary rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-10 right-10 w-40 h-40 bg-secondary rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-1/2 left-1/3 w-36 h-36 bg-accent rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
         </div>
 
         <div className="container mx-auto max-w-5xl relative z-10">

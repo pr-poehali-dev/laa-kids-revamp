@@ -164,56 +164,112 @@ const Index = () => {
             <div className="text-3xl font-bold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
               LAA KIDS
             </div>
-            <div className="text-xs text-muted-foreground">Агентство праздников</div>
+            <div className="text-xs text-muted-foreground hidden md:block">Агентство праздников</div>
           </div>
-          <Button 
-            onClick={() => window.open(whatsappLink, '_blank')}
-            className="bg-gradient-to-r from-primary to-secondary hover:scale-105 transition-transform shadow-lg animate-bounce-subtle"
-            size="lg"
-          >
-            <Icon name="MessageCircle" className="mr-2" size={20} />
-            Заказать со скидкой 500₽
-          </Button>
+          <div className="flex gap-2">
+            <Button 
+              onClick={() => window.location.href = `tel:${whatsappNumber}`}
+              variant="outline"
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all"
+              size="lg"
+            >
+              <Icon name="Phone" className="md:mr-2" size={20} />
+              <span className="hidden md:inline">Позвонить</span>
+            </Button>
+            <Button 
+              onClick={() => window.open(whatsappLink, '_blank')}
+              className="bg-gradient-to-r from-primary to-secondary hover:scale-105 transition-transform shadow-lg"
+              size="lg"
+            >
+              <Icon name="MessageCircle" className="md:mr-2" size={20} />
+              <span className="hidden md:inline">Заказать -500₽</span>
+            </Button>
+          </div>
         </div>
       </header>
 
-      <section className="py-20 px-4 text-center bg-gradient-to-r from-primary/10 via-accent/10 to-secondary/10 animate-fade-in">
-        <div className="container mx-auto max-w-5xl">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+      <section className="relative py-20 px-4 text-center bg-gradient-to-r from-primary/10 via-accent/10 to-secondary/10 animate-fade-in overflow-hidden">
+        <div className="absolute left-0 bottom-0 w-48 md:w-64 opacity-90 animate-scale-in pointer-events-none z-0">
+          <img 
+            src="https://cdn.poehali.dev/files/bc49f650-a6d4-4625-aff7-38a45c10e8f3.jpg" 
+            alt="Фиксики"
+            className="w-full h-auto"
+            style={{ animationDelay: '0.3s' }}
+          />
+        </div>
+        
+        <div className="absolute right-0 bottom-0 w-48 md:w-64 opacity-90 animate-scale-in pointer-events-none z-0">
+          <img 
+            src="https://cdn.poehali.dev/files/d8af0c87-3a62-410a-9a3f-353773fcbcb0.jpg" 
+            alt="Дедпул"
+            className="w-full h-auto"
+            style={{ animationDelay: '0.5s' }}
+          />
+        </div>
+
+        <div className="absolute left-1/4 bottom-0 w-40 md:w-56 opacity-80 animate-scale-in pointer-events-none z-0 hidden lg:block">
+          <img 
+            src="https://cdn.poehali.dev/files/59114da6-2fb2-4791-aed5-8bd9243588f4.jpg" 
+            alt="Барби и Кен"
+            className="w-full h-auto"
+            style={{ animationDelay: '0.4s' }}
+          />
+        </div>
+
+        <div className="absolute right-1/4 bottom-0 w-40 md:w-56 opacity-80 animate-scale-in pointer-events-none z-0 hidden lg:block">
+          <img 
+            src="https://cdn.poehali.dev/files/62b73ddb-43c7-42af-aeae-8daa52887936.jpg" 
+            alt="Аниме персонажи"
+            className="w-full h-auto"
+            style={{ animationDelay: '0.6s' }}
+          />
+        </div>
+
+        <div className="container mx-auto max-w-5xl relative z-10">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent drop-shadow-lg">
             Незабываемый День Рождения для вашего ребенка! 🎉
           </h1>
-          <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-gray-800 font-semibold mb-8 max-w-3xl mx-auto drop-shadow">
             Профессиональные аниматоры, яркие костюмы и море радости! Более 1000 счастливых праздников по всей Москве
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <Button 
+              onClick={() => window.location.href = `tel:${whatsappNumber}`}
+              size="lg"
+              variant="outline"
+              className="bg-white border-4 border-primary text-primary hover:bg-primary hover:text-white transition-all text-xl px-10 py-7 shadow-2xl hover:scale-110 font-bold"
+            >
+              <Icon name="Phone" className="mr-2" size={28} />
+              Позвонить сейчас
+            </Button>
+            <Button 
               onClick={() => window.open(whatsappLink, '_blank')}
               size="lg"
-              className="bg-gradient-to-r from-primary to-secondary hover:scale-105 transition-transform text-lg px-8 py-6 shadow-xl"
+              className="bg-gradient-to-r from-primary to-secondary hover:scale-110 transition-transform text-xl px-10 py-7 shadow-2xl font-bold"
             >
-              <Icon name="Gift" className="mr-2" size={24} />
-              Заказать праздник
+              <Icon name="MessageCircle" className="mr-2" size={28} />
+              WhatsApp -500₽
             </Button>
-            <Badge variant="secondary" className="text-lg px-6 py-3 bg-secondary text-white animate-pulse">
-              При заказе с сайта скидка 500₽!
-            </Badge>
           </div>
+          <Badge variant="secondary" className="text-xl px-8 py-4 bg-secondary text-white animate-pulse shadow-xl mb-12">
+            🎁 При заказе с сайта скидка 500₽!
+          </Badge>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
-            <div className="bg-white/80 backdrop-blur p-4 rounded-xl shadow-lg hover:scale-105 transition-transform">
+            <div className="bg-white/90 backdrop-blur p-4 rounded-xl shadow-lg hover:scale-105 transition-transform border-2 border-primary/20">
               <div className="text-4xl font-bold text-primary">1000+</div>
-              <div className="text-sm text-gray-600">Праздников</div>
+              <div className="text-sm text-gray-600 font-semibold">Праздников</div>
             </div>
-            <div className="bg-white/80 backdrop-blur p-4 rounded-xl shadow-lg hover:scale-105 transition-transform">
+            <div className="bg-white/90 backdrop-blur p-4 rounded-xl shadow-lg hover:scale-105 transition-transform border-2 border-accent/20">
               <div className="text-4xl font-bold text-accent">50+</div>
-              <div className="text-sm text-gray-600">Персонажей</div>
+              <div className="text-sm text-gray-600 font-semibold">Персонажей</div>
             </div>
-            <div className="bg-white/80 backdrop-blur p-4 rounded-xl shadow-lg hover:scale-105 transition-transform">
+            <div className="bg-white/90 backdrop-blur p-4 rounded-xl shadow-lg hover:scale-105 transition-transform border-2 border-secondary/20">
               <div className="text-4xl font-bold text-secondary">5</div>
-              <div className="text-sm text-gray-600">Лет опыта</div>
+              <div className="text-sm text-gray-600 font-semibold">Лет опыта</div>
             </div>
-            <div className="bg-white/80 backdrop-blur p-4 rounded-xl shadow-lg hover:scale-105 transition-transform">
+            <div className="bg-white/90 backdrop-blur p-4 rounded-xl shadow-lg hover:scale-105 transition-transform border-2 border-primary/20">
               <div className="text-4xl font-bold text-primary">100%</div>
-              <div className="text-sm text-gray-600">Радости</div>
+              <div className="text-sm text-gray-600 font-semibold">Радости</div>
             </div>
           </div>
         </div>

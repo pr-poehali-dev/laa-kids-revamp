@@ -2,553 +2,520 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import Icon from "@/components/ui/icon";
+import { useState } from "react";
 
 const Index = () => {
+  const [formData, setFormData] = useState({ name: "", phone: "", comment: "" });
   const whatsappNumber = "89508270441";
-  const whatsappMessage = "Здравствуйте! Хочу заказать праздник для ребенка и получить скидку 500₽";
+  const whatsappMessage = "Здравствуйте! Хочу заказать праздник для ребенка";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
-  const programs = [
-    {
-      title: "🦸 Супергерои",
-      age: "4-7 лет",
-      description: "Спасение мира с любимыми героями Marvel и DC",
-      price: "от 5000₽",
-      features: ["Костюмы героев", "Спасательные миссии", "Фото с героями", "Подарки"]
-    },
-    {
-      title: "🧚 Волшебная сказка",
-      age: "3-6 лет",
-      description: "Путешествие в мир принцесс и фей",
-      price: "от 4500₽",
-      features: ["Принцессы Disney", "Волшебные превращения", "Танцы", "Аквагрим"]
-    },
-    {
-      title: "🎮 Игровая вечеринка",
-      age: "8-12 лет",
-      description: "Квесты и челленджи в стиле популярных игр",
-      price: "от 5500₽",
-      features: ["Тематические квесты", "Командные игры", "Призы победителям", "Дискотека"]
-    },
-    {
-      title: "🎨 Творческая мастерская",
-      age: "5-10 лет",
-      description: "Развивающие игры и мастер-классы",
-      price: "от 4000₽",
-      features: ["Мастер-классы", "Рисование", "Лепка", "Поделки на память"]
-    },
-    {
-      title: "🏴‍☠️ Пираты",
-      age: "5-9 лет",
-      description: "Поиск сокровищ и морские приключения",
-      price: "от 5000₽",
-      features: ["Поиск сокровищ", "Пиратские игры", "Карта квеста", "Сундук с призами"]
-    },
-    {
-      title: "🎪 Цирковое шоу",
-      age: "4-10 лет",
-      description: "Фокусы, трюки и веселые клоуны",
-      price: "от 6000₽",
-      features: ["Фокусы", "Жонглирование", "Шоу мыльных пузырей", "Твистинг"]
-    }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const message = `Новая заявка!\nИмя: ${formData.name}\nТелефон: ${formData.phone}\nКомментарий: ${formData.comment}`;
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+  };
+
+  const advantages = [
+    { icon: "Star", title: "1000+ праздников", text: "Проведено по всей Москве" },
+    { icon: "Award", title: "50+ персонажей", text: "От Disney до супергероев" },
+    { icon: "Users", title: "Проф. аниматоры", text: "Актеры с опытом от 3 лет" },
+    { icon: "Shield", title: "Гарантия качества", text: "Вернем деньги, если не понравится" },
+    { icon: "Clock", title: "Приедем вовремя", text: "Пунктуальность - наш принцип" },
+    { icon: "Gift", title: "Подарки детям", text: "Шарики и сувениры в подарок" }
   ];
 
-  const animators = [
-    {
-      name: "Человек-паук",
-      image: "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/6ca62bf6-0e82-4c0d-b5e5-f7f91822ad77.jpg",
-      experience: "5+ лет"
-    },
-    {
-      name: "Эльза",
-      image: "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/6ca62bf6-0e82-4c0d-b5e5-f7f91822ad77.jpg",
-      experience: "4 года"
-    },
-    {
-      name: "Фиксик",
-      image: "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/6ca62bf6-0e82-4c0d-b5e5-f7f91822ad77.jpg",
-      experience: "3 года"
-    },
-    {
-      name: "Барби",
-      image: "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/6ca62bf6-0e82-4c0d-b5e5-f7f91822ad77.jpg",
-      experience: "6 лет"
-    }
+  const characters = [
+    { name: "Человек-паук", age: "5-10 лет", emoji: "🕷️" },
+    { name: "Эльза и Анна", age: "3-8 лет", emoji: "❄️" },
+    { name: "Фиксики", age: "3-7 лет", emoji: "🔧" },
+    { name: "Леди Баг", age: "5-10 лет", emoji: "🐞" },
+    { name: "Барби", age: "4-9 лет", emoji: "💖" },
+    { name: "Супергерои Marvel", age: "6-12 лет", emoji: "⚡" },
+    { name: "Пираты", age: "5-10 лет", emoji: "🏴‍☠️" },
+    { name: "Минни Маус", age: "2-6 лет", emoji: "🎀" }
   ];
 
   const packages = [
     {
-      name: "Базовый",
-      price: "4000₽",
+      name: "Легкий старт",
+      price: "3500₽",
+      oldPrice: "4500₽",
       duration: "1 час",
-      features: ["1 аниматор", "Игровая программа", "Аквагрим", "Шары в подарок"],
-      popular: false
+      features: ["1 аниматор", "Игровая программа", "Реквизит", "Музыка"],
+      color: "from-pink-500 to-pink-600"
     },
     {
-      name: "Стандарт",
-      price: "6500₽",
+      name: "Популярный",
+      price: "5500₽",
+      oldPrice: "7000₽",
       duration: "1.5 часа",
-      features: ["2 аниматора", "Расширенная программа", "Аквагрим", "Шоу мыльных пузырей", "Фото с героями"],
-      popular: true
+      features: ["2 аниматора", "Игры и квесты", "Аквагрим", "Шоу мыльных пузырей", "Фото с героями"],
+      popular: true,
+      color: "from-purple-500 to-purple-600"
     },
     {
-      name: "Премиум",
-      price: "10000₽",
+      name: "ВАУ-праздник",
+      price: "9000₽",
+      oldPrice: "12000₽",
       duration: "2 часа",
-      features: ["3 аниматора", "VIP программа", "Аквагрим", "Шоу программа", "Фото и видео", "Подарки всем детям", "Украшение зала"],
-      popular: false
+      features: ["3 аниматора", "Шоу-программа", "Фокусы", "Твистинг", "Дискотека", "Фото и видео", "Подарки всем"],
+      color: "from-orange-500 to-orange-600"
     }
   ];
 
   const reviews = [
     {
-      name: "Елена М.",
+      name: "Елена Смирнова",
+      avatar: "👩",
       rating: 5,
-      text: "Заказывали супергероев на 6-летие сына. Дети были в восторге! Аниматоры профессионалы, держали внимание 15 детей 2 часа. Спасибо огромное!",
-      date: "15.10.2024"
+      text: "Заказывали Человека-паука на 7 лет сыну. Костюм шикарный, программа огонь! 12 детей были заняты 2 часа. Спасибо огромное!",
+      date: "3 дня назад"
     },
     {
-      name: "Анна П.",
+      name: "Анна Петрова",
+      avatar: "👱‍♀️",
       rating: 5,
-      text: "Эльза на дне рождения дочки была просто волшебной! Костюм шикарный, голос как в мультике. Даже взрослые были в восторге. Рекомендую!",
-      date: "08.10.2024"
+      text: "Эльза просто волшебная! Дочка и её подружки были в восторге. Аниматор поет как в мультике, очень профессионально!",
+      date: "неделю назад"
     },
     {
-      name: "Дмитрий К.",
+      name: "Дмитрий Козлов",
+      avatar: "👨",
       rating: 5,
-      text: "Отличная организация! Приехали вовремя, провели квест с поиском сокровищ. Дети до сих пор вспоминают. Цена-качество 👍",
-      date: "01.10.2024"
+      text: "Первый раз заказывали аниматоров - очень переживали. Но всё прошло отлично! Приехали вовремя, дети довольны. Рекомендую!",
+      date: "2 недели назад"
+    },
+    {
+      name: "Мария Иванова",
+      avatar: "👩‍🦰",
+      rating: 5,
+      text: "Лучший праздник! Брали пакет ВАУ с тремя аниматорами. Дети и родители в восторге. Видео и фото супер. Будем заказывать еще!",
+      date: "3 недели назад"
     }
   ];
 
   const faq = [
     {
-      question: "За какое время нужно заказывать аниматора?",
-      answer: "Рекомендуем бронировать за 1-2 недели. В выходные и праздники лучше за месяц. Но мы постараемся помочь и в срочных случаях!"
+      question: "За сколько нужно заказывать?",
+      answer: "Рекомендуем за 1-2 недели, особенно на выходные. Но можем помочь и срочно - звоните!"
     },
     {
-      question: "Выезжаете ли вы за город?",
-      answer: "Да, работаем по всей Москве и области. Для выезда за МКАД добавляется 500₽ за каждые 10 км."
+      question: "Какая предоплата?",
+      answer: "Всего 1000₽ для бронирования даты. Остальное - после праздника наличными или переводом."
     },
     {
-      question: "Что нужно подготовить к приезду аниматора?",
-      answer: "Просто свободное место для игр (2-3 метра) и хорошее настроение! Весь реквизит, музыку и программу мы привозим с собой."
+      question: "Выезжаете за город?",
+      answer: "Да! По Москве бесплатно, за МКАД +500₽ за каждые 10 км."
     },
     {
-      question: "Можно ли изменить программу?",
-      answer: "Конечно! Мы адаптируем программу под возраст детей, их интересы и ваши пожелания. Обсудим все детали перед праздником."
+      question: "Что если аниматор опоздает?",
+      answer: "Мы ВСЕГДА приезжаем вовремя. Но если вдруг опоздаем (еще ни разу не было) - вернем полную стоимость."
     },
     {
-      question: "Что входит в стоимость?",
-      answer: "Работа аниматора, костюм, весь реквизит, музыкальное сопровождение, игровая программа, аквагрим (в зависимости от пакета)."
+      question: "Можно ли поменять персонажа?",
+      answer: "Да, можно до 3 дней до праздника бесплатно. Позже - доплата 500₽."
     },
     {
-      question: "Как оплатить?",
-      answer: "Предоплата 30% для бронирования даты, остальное - после праздника. Принимаем наличные и переводы на карту."
+      question: "Что нужно подготовить?",
+      answer: "Только хорошее настроение! Весь реквизит, музыку, костюмы привозим мы."
     }
   ];
 
-  const photos = [
-    "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/c94a3d4f-12b2-4468-a2cc-994ff5d9c77c.jpg",
-    "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/b461bde1-ac80-40f5-b621-92568596c830.jpg",
-    "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/c94a3d4f-12b2-4468-a2cc-994ff5d9c77c.jpg",
-    "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/b461bde1-ac80-40f5-b621-92568596c830.jpg"
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 via-purple-50 to-orange-50">
-      <header className="bg-white/80 backdrop-blur-sm sticky top-0 z-50 border-b-4 border-primary shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <div className="text-3xl font-bold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+    <div className="min-h-screen bg-white">
+      <div className="fixed top-0 right-0 left-0 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 z-[100]"></div>
+      
+      <header className="bg-white shadow-sm sticky top-0 z-50 border-b">
+        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+          <div className="flex flex-col">
+            <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-orange-600">
               LAA KIDS
             </div>
-            <div className="text-xs text-muted-foreground hidden md:block">Агентство праздников</div>
+            <div className="text-[10px] md:text-xs text-gray-600 font-medium">Праздники мечты в Москве</div>
           </div>
-          <div className="flex gap-2">
-            <Button 
-              onClick={() => window.location.href = `tel:${whatsappNumber}`}
-              variant="outline"
-              className="border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all"
-              size="lg"
-            >
-              <Icon name="Phone" className="md:mr-2" size={20} />
-              <span className="hidden md:inline">Позвонить</span>
-            </Button>
+          <div className="flex flex-col items-end gap-1">
+            <a href={`tel:${whatsappNumber}`} className="text-lg md:text-xl font-bold text-gray-900">8 (950) 827-04-41</a>
             <Button 
               onClick={() => window.open(whatsappLink, '_blank')}
-              className="bg-gradient-to-r from-primary to-secondary hover:scale-105 transition-transform shadow-lg"
-              size="lg"
+              size="sm"
+              className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white shadow-lg"
             >
-              <Icon name="MessageCircle" className="md:mr-2" size={20} />
-              <span className="hidden md:inline">Заказать -500₽</span>
+              <Icon name="MessageCircle" className="mr-1" size={16} />
+              WhatsApp
             </Button>
           </div>
         </div>
       </header>
 
-      <section className="relative py-20 px-4 text-center bg-gradient-to-br from-pink-100 via-purple-100 to-orange-100 animate-fade-in overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-primary rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-10 right-10 w-40 h-40 bg-secondary rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
-          <div className="absolute top-1/2 left-1/3 w-36 h-36 bg-accent rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+      <section className="relative bg-gradient-to-br from-pink-50 via-purple-50 to-orange-50 py-12 md:py-20 overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-10 text-9xl">🎈</div>
+          <div className="absolute top-40 right-20 text-8xl">🎉</div>
+          <div className="absolute bottom-20 left-1/4 text-7xl">🎁</div>
+          <div className="absolute bottom-40 right-1/3 text-9xl">🎊</div>
         </div>
-
-        <div className="container mx-auto max-w-5xl relative z-10">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent drop-shadow-lg">
-            Незабываемый День Рождения для вашего ребенка! 🎉
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-800 font-semibold mb-8 max-w-3xl mx-auto drop-shadow">
-            Профессиональные аниматоры, яркие костюмы и море радости! Более 1000 счастливых праздников по всей Москве
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <Button 
-              onClick={() => window.location.href = `tel:${whatsappNumber}`}
-              size="lg"
-              variant="outline"
-              className="bg-white border-4 border-primary text-primary hover:bg-primary hover:text-white transition-all text-xl px-10 py-7 shadow-2xl hover:scale-110 font-bold"
-            >
-              <Icon name="Phone" className="mr-2" size={28} />
-              Позвонить сейчас
-            </Button>
-            <Button 
-              onClick={() => window.open(whatsappLink, '_blank')}
-              size="lg"
-              className="bg-gradient-to-r from-primary to-secondary hover:scale-110 transition-transform text-xl px-10 py-7 shadow-2xl font-bold"
-            >
-              <Icon name="MessageCircle" className="mr-2" size={28} />
-              WhatsApp -500₽
-            </Button>
-          </div>
-          <Badge variant="secondary" className="text-xl px-8 py-4 bg-secondary text-white animate-pulse shadow-xl mb-12">
-            🎁 При заказе с сайта скидка 500₽!
+        
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <Badge className="mb-4 text-sm md:text-base px-4 py-2 bg-red-500 text-white animate-pulse">
+            🔥 АКЦИЯ! Скидка 1000₽ при заказе сегодня
           </Badge>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
-            <div className="bg-white/90 backdrop-blur p-4 rounded-xl shadow-lg hover:scale-105 transition-transform border-2 border-primary/20">
-              <div className="text-4xl font-bold text-primary">1000+</div>
-              <div className="text-sm text-gray-600 font-semibold">Праздников</div>
-            </div>
-            <div className="bg-white/90 backdrop-blur p-4 rounded-xl shadow-lg hover:scale-105 transition-transform border-2 border-accent/20">
-              <div className="text-4xl font-bold text-accent">50+</div>
-              <div className="text-sm text-gray-600 font-semibold">Персонажей</div>
-            </div>
-            <div className="bg-white/90 backdrop-blur p-4 rounded-xl shadow-lg hover:scale-105 transition-transform border-2 border-secondary/20">
-              <div className="text-4xl font-bold text-secondary">5</div>
-              <div className="text-sm text-gray-600 font-semibold">Лет опыта</div>
-            </div>
-            <div className="bg-white/90 backdrop-blur p-4 rounded-xl shadow-lg hover:scale-105 transition-transform border-2 border-primary/20">
-              <div className="text-4xl font-bold text-primary">100%</div>
-              <div className="text-sm text-gray-600 font-semibold">Радости</div>
-            </div>
-          </div>
-        </div>
-      </section>
+          
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 text-gray-900 leading-tight">
+            Детские праздники<br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-orange-600">
+              с аниматорами в Москве
+            </span>
+          </h1>
+          
+          <p className="text-lg md:text-2xl text-gray-700 font-semibold mb-8 max-w-3xl mx-auto">
+            Более 1000 счастливых праздников 🎉<br/>
+            От 3500₽ за программу • Приедем в любую точку Москвы
+          </p>
 
-      <section className="py-16 px-4 bg-white">
-        <div className="container mx-auto max-w-7xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            🎭 Программы праздников
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {programs.map((program, idx) => (
-              <Card key={idx} className="hover:scale-105 transition-transform hover:shadow-2xl border-2 border-primary/20 animate-scale-in" style={{animationDelay: `${idx * 0.1}s`}}>
-                <CardHeader>
-                  <CardTitle className="text-2xl">{program.title}</CardTitle>
-                  <CardDescription className="text-lg">
-                    <Badge variant="outline" className="mb-2">{program.age}</Badge>
-                    <p className="mt-2">{program.description}</p>
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="mb-4">
-                    <div className="text-3xl font-bold text-primary">{program.price}</div>
-                  </div>
-                  <ul className="space-y-2 mb-4">
-                    {program.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2">
-                        <Icon name="Check" size={18} className="text-secondary" />
-                        <span className="text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button 
-                    onClick={() => window.open(whatsappLink, '_blank')}
-                    className="w-full bg-gradient-to-r from-primary to-secondary hover:scale-105 transition-transform"
-                  >
-                    Выбрать программу
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 px-4 bg-gradient-to-r from-purple-50 to-pink-50">
-        <div className="container mx-auto max-w-7xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
-            🌟 Наши аниматоры
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {animators.map((animator, idx) => (
-              <Card key={idx} className="text-center hover:scale-105 transition-transform hover:shadow-xl animate-scale-in" style={{animationDelay: `${idx * 0.1}s`}}>
-                <CardContent className="pt-6">
-                  <img 
-                    src={animator.image} 
-                    alt={animator.name}
-                    className="w-full h-64 object-cover rounded-lg mb-4 shadow-lg"
-                  />
-                  <h3 className="text-xl font-bold mb-2">{animator.name}</h3>
-                  <Badge variant="secondary">Опыт: {animator.experience}</Badge>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <p className="text-gray-600 mb-4">И еще более 30 персонажей на ваш выбор!</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
+            <Button 
+              onClick={() => document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' })}
+              size="lg"
+              className="bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white text-lg md:text-xl px-8 md:px-12 py-6 md:py-7 shadow-2xl hover:scale-105 transition-all font-bold"
+            >
+              <Icon name="Sparkles" className="mr-2" size={24} />
+              Заказать праздник
+            </Button>
             <Button 
               onClick={() => window.open(whatsappLink, '_blank')}
-              variant="outline"
               size="lg"
-              className="border-2 border-primary hover:bg-primary hover:text-white transition-all"
+              variant="outline"
+              className="border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white text-lg md:text-xl px-8 md:px-12 py-6 md:py-7 shadow-xl hover:scale-105 transition-all font-bold"
             >
-              Посмотреть всех персонажей
+              <Icon name="MessageCircle" className="mr-2" size={24} />
+              Консультация в WhatsApp
             </Button>
           </div>
-        </div>
-      </section>
 
-      <section className="py-16 px-4 bg-white">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            💎 Цены и пакеты
-          </h2>
-          <div className="text-center mb-12">
-            <Badge variant="secondary" className="text-lg px-6 py-2 bg-secondary text-white animate-pulse">
-              🎁 Скидка 500₽ при заказе с сайта!
-            </Badge>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {packages.map((pkg, idx) => (
-              <Card 
-                key={idx} 
-                className={`hover:scale-105 transition-transform ${pkg.popular ? 'border-4 border-primary shadow-2xl' : 'border-2 border-gray-200'} animate-scale-in`}
-                style={{animationDelay: `${idx * 0.15}s`}}
-              >
-                <CardHeader>
-                  {pkg.popular && (
-                    <Badge className="mb-2 bg-gradient-to-r from-primary to-secondary text-white w-fit">
-                      ⭐ Популярный
-                    </Badge>
-                  )}
-                  <CardTitle className="text-2xl">{pkg.name}</CardTitle>
-                  <CardDescription>
-                    <div className="text-4xl font-bold text-primary mt-2">{pkg.price}</div>
-                    <div className="text-lg mt-1">{pkg.duration}</div>
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 mb-6">
-                    {pkg.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2">
-                        <Icon name="CheckCircle" size={20} className="text-secondary flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button 
-                    onClick={() => window.open(whatsappLink, '_blank')}
-                    className={`w-full ${pkg.popular ? 'bg-gradient-to-r from-primary to-secondary' : ''} hover:scale-105 transition-transform`}
-                    variant={pkg.popular ? "default" : "outline"}
-                  >
-                    Заказать пакет
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 px-4 bg-gradient-to-r from-orange-50 to-pink-50">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
-            📸 Фото с праздников
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {photos.map((photo, idx) => (
-              <div key={idx} className="relative overflow-hidden rounded-xl shadow-xl hover:scale-105 transition-transform animate-scale-in" style={{animationDelay: `${idx * 0.1}s`}}>
-                <img 
-                  src={photo} 
-                  alt={`Праздник ${idx + 1}`}
-                  className="w-full h-80 object-cover"
-                />
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-4xl mx-auto">
+            {advantages.map((adv, idx) => (
+              <div key={idx} className="bg-white/80 backdrop-blur rounded-2xl p-3 md:p-4 shadow-lg hover:shadow-xl transition-all hover:scale-105">
+                <Icon name={adv.icon as any} className="mx-auto mb-2 text-purple-600" size={32} />
+                <div className="text-base md:text-lg font-bold text-gray-900">{adv.title}</div>
+                <div className="text-xs md:text-sm text-gray-600">{adv.text}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 px-4 bg-white">
-        <div className="container mx-auto max-w-4xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
-            ⭐ Отзывы родителей
+      <section className="py-12 md:py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-black text-center mb-3 text-gray-900">
+            Популярные персонажи 🌟
           </h2>
-          <div className="space-y-6">
+          <p className="text-center text-gray-600 mb-8 md:mb-12 text-lg">50+ героев на любой вкус</p>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-5xl mx-auto">
+            {characters.map((char, idx) => (
+              <Card key={idx} className="hover:shadow-xl transition-all hover:scale-105 cursor-pointer border-2 hover:border-purple-500">
+                <CardHeader className="text-center pb-3">
+                  <div className="text-5xl md:text-6xl mb-2">{char.emoji}</div>
+                  <CardTitle className="text-base md:text-lg">{char.name}</CardTitle>
+                  <CardDescription className="text-xs md:text-sm">Возраст: {char.age}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Button 
+              onClick={() => window.open(whatsappLink, '_blank')}
+              size="lg"
+              variant="outline"
+              className="border-2 border-purple-500 text-purple-600 hover:bg-purple-500 hover:text-white font-bold"
+            >
+              Посмотреть всех персонажей (50+)
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 md:py-16 bg-gradient-to-br from-purple-50 to-pink-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-black text-center mb-3 text-gray-900">
+            Пакеты и цены 💰
+          </h2>
+          <p className="text-center text-gray-600 mb-8 md:mb-12 text-lg">Выберите подходящий вариант</p>
+          
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {packages.map((pkg, idx) => (
+              <Card key={idx} className={`relative hover:scale-105 transition-all ${pkg.popular ? 'border-4 border-purple-500 shadow-2xl' : 'border-2'}`}>
+                {pkg.popular && (
+                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-1 text-sm">
+                    ⭐ Хит продаж
+                  </Badge>
+                )}
+                <CardHeader className="text-center pb-3">
+                  <CardTitle className="text-2xl mb-2">{pkg.name}</CardTitle>
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <span className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">{pkg.price}</span>
+                    <span className="text-xl text-gray-400 line-through">{pkg.oldPrice}</span>
+                  </div>
+                  <CardDescription className="text-base font-semibold">{pkg.duration}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 mb-6">
+                    {pkg.features.map((feature, fIdx) => (
+                      <li key={fIdx} className="flex items-start gap-2 text-sm">
+                        <Icon name="CheckCircle" className="text-green-500 flex-shrink-0 mt-0.5" size={18} />
+                        <span className="text-gray-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button 
+                    onClick={() => {
+                      const message = `Хочу заказать пакет "${pkg.name}" за ${pkg.price}`;
+                      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                    }}
+                    className={`w-full bg-gradient-to-r ${pkg.color} text-white hover:opacity-90 font-bold text-base py-6`}
+                  >
+                    Заказать сейчас
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-8 text-center">
+            <Badge variant="outline" className="text-base px-6 py-3 bg-white border-2 border-purple-500">
+              🎁 Скидка 1000₽ при заказе через сайт сегодня!
+            </Badge>
+          </div>
+        </div>
+      </section>
+
+      <section id="order-form" className="py-12 md:py-16 bg-gradient-to-br from-pink-600 via-purple-600 to-orange-600">
+        <div className="container mx-auto px-4 max-w-2xl">
+          <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-10">
+            <h2 className="text-3xl md:text-4xl font-black text-center mb-3 text-gray-900">
+              Закажите праздник прямо сейчас! 🎉
+            </h2>
+            <p className="text-center text-gray-600 mb-6 text-base md:text-lg">
+              Оставьте заявку - перезвоним за 5 минут
+            </p>
+            
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <Input 
+                  type="text"
+                  placeholder="Ваше имя"
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  required
+                  className="text-base py-6 border-2"
+                />
+              </div>
+              <div>
+                <Input 
+                  type="tel"
+                  placeholder="Телефон"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  required
+                  className="text-base py-6 border-2"
+                />
+              </div>
+              <div>
+                <Textarea 
+                  placeholder="Какой персонаж? Сколько детей? Пожелания..."
+                  value={formData.comment}
+                  onChange={(e) => setFormData({...formData, comment: e.target.value})}
+                  rows={4}
+                  className="text-base border-2"
+                />
+              </div>
+              <Button 
+                type="submit"
+                size="lg"
+                className="w-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-bold text-lg py-7 shadow-xl"
+              >
+                <Icon name="Send" className="mr-2" size={20} />
+                Отправить заявку
+              </Button>
+              <p className="text-xs text-gray-500 text-center">
+                Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
+              </p>
+            </form>
+
+            <div className="mt-6 pt-6 border-t flex flex-col sm:flex-row gap-3 justify-center">
+              <Button 
+                onClick={() => window.location.href = `tel:${whatsappNumber}`}
+                variant="outline"
+                className="border-2 border-gray-300 font-semibold"
+              >
+                <Icon name="Phone" className="mr-2" size={20} />
+                Позвонить: 8 (950) 827-04-41
+              </Button>
+              <Button 
+                onClick={() => window.open(whatsappLink, '_blank')}
+                className="bg-green-500 hover:bg-green-600 text-white font-semibold"
+              >
+                <Icon name="MessageCircle" className="mr-2" size={20} />
+                Написать в WhatsApp
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 md:py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-black text-center mb-3 text-gray-900">
+            Отзывы родителей ❤️
+          </h2>
+          <p className="text-center text-gray-600 mb-8 md:mb-12 text-lg">1000+ довольных семей</p>
+          
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {reviews.map((review, idx) => (
-              <Card key={idx} className="hover:shadow-xl transition-shadow animate-fade-in" style={{animationDelay: `${idx * 0.1}s`}}>
+              <Card key={idx} className="hover:shadow-xl transition-all border-2">
                 <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-xl">{review.name}</CardTitle>
-                      <CardDescription>{review.date}</CardDescription>
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="text-4xl">{review.avatar}</div>
+                      <div>
+                        <CardTitle className="text-lg">{review.name}</CardTitle>
+                        <CardDescription className="text-sm">{review.date}</CardDescription>
+                      </div>
                     </div>
                     <div className="flex gap-1">
                       {[...Array(review.rating)].map((_, i) => (
-                        <Icon key={i} name="Star" size={20} className="fill-secondary text-secondary" />
+                        <Icon key={i} name="Star" className="text-yellow-500 fill-yellow-500" size={18} />
                       ))}
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-700 italic">"{review.text}"</p>
+                  <p className="text-gray-700 leading-relaxed">{review.text}</p>
                 </CardContent>
               </Card>
             ))}
           </div>
+
           <div className="text-center mt-8">
             <Button 
               onClick={() => window.open(whatsappLink, '_blank')}
               size="lg"
               variant="outline"
-              className="border-2 border-primary hover:bg-primary hover:text-white transition-all"
+              className="border-2 border-purple-500 text-purple-600 hover:bg-purple-500 hover:text-white font-bold"
             >
-              Оставить свой отзыв
+              Читать все отзывы
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="py-16 px-4 bg-gradient-to-r from-purple-50 to-orange-50">
-        <div className="container mx-auto max-w-4xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            ❓ Частые вопросы
+      <section className="py-12 md:py-16 bg-gray-50">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-black text-center mb-8 md:mb-12 text-gray-900">
+            Частые вопросы 💬
           </h2>
-          <Accordion type="single" collapsible className="space-y-4">
+          
+          <Accordion type="single" collapsible className="space-y-3">
             {faq.map((item, idx) => (
-              <AccordionItem key={idx} value={`item-${idx}`} className="bg-white rounded-lg px-6 shadow-md border-2 border-primary/20">
-                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+              <AccordionItem key={idx} value={`item-${idx}`} className="bg-white border-2 rounded-xl px-6">
+                <AccordionTrigger className="text-left font-bold text-base md:text-lg hover:text-purple-600">
                   {item.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-gray-700">
+                <AccordionContent className="text-gray-700 text-sm md:text-base leading-relaxed">
                   {item.answer}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
-        </div>
-      </section>
 
-      <section className="py-16 px-4 bg-white">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
-            🎊 Специальная акция!
-          </h2>
-          <Card className="border-4 border-secondary shadow-2xl animate-scale-in">
-            <CardHeader>
-              <CardTitle className="text-3xl text-secondary">Скидка 500 рублей при заказе с сайта!</CardTitle>
-              <CardDescription className="text-lg">
-                Закажите праздник прямо сейчас через WhatsApp и получите гарантированную скидку
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="bg-gradient-to-r from-secondary/10 to-primary/10 p-6 rounded-lg mb-6">
-                <p className="text-xl font-semibold mb-4">Акция действует на все пакеты!</p>
-                <p className="text-gray-600">Просто напишите нам в WhatsApp и укажите промокод "САЙТ500"</p>
-              </div>
-              <Button 
-                onClick={() => window.open(whatsappLink, '_blank')}
-                size="lg"
-                className="bg-gradient-to-r from-primary to-secondary hover:scale-110 transition-transform text-xl px-12 py-6 shadow-xl animate-bounce-subtle"
-              >
-                <Icon name="MessageCircle" className="mr-2" size={28} />
-                Заказать со скидкой в WhatsApp
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      <section className="py-16 px-4 bg-gradient-to-r from-pink-50 via-purple-50 to-orange-50">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
-            📞 Контакты
-          </h2>
-          <Card className="shadow-xl">
-            <CardContent className="pt-8">
-              <div className="space-y-6">
-                <div>
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <Icon name="Phone" size={24} className="text-primary" />
-                    <span className="text-2xl font-bold">8 (950) 827-04-41</span>
-                  </div>
-                  <p className="text-gray-600">Звоните с 9:00 до 21:00</p>
-                </div>
-                <div>
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <Icon name="MapPin" size={24} className="text-secondary" />
-                    <span className="text-xl">Москва и Московская область</span>
-                  </div>
-                </div>
-                <Button 
-                  onClick={() => window.open(whatsappLink, '_blank')}
-                  size="lg"
-                  className="bg-gradient-to-r from-green-500 to-green-600 hover:scale-105 transition-transform text-xl px-8 py-6 shadow-xl"
-                >
-                  <Icon name="MessageCircle" className="mr-2" size={24} />
-                  Написать в WhatsApp
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      <div className="fixed bottom-6 right-6 z-50 animate-bounce-subtle">
-        <Button
-          onClick={() => window.open(whatsappLink, '_blank')}
-          size="lg"
-          className="bg-gradient-to-r from-green-500 to-green-600 hover:scale-110 transition-transform shadow-2xl rounded-full w-16 h-16 p-0"
-        >
-          <Icon name="MessageCircle" size={32} />
-        </Button>
-      </div>
-
-      <footer className="bg-gray-900 text-white py-8 px-4">
-        <div className="container mx-auto max-w-6xl text-center">
-          <div className="text-3xl font-bold mb-4 bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
-            LAA KIDS
-          </div>
-          <p className="text-gray-400 mb-4">Делаем детские праздники незабываемыми с 2019 года</p>
-          <div className="flex justify-center gap-4 mb-4">
+          <div className="mt-10 text-center">
+            <p className="text-gray-600 mb-4 text-lg">Остались вопросы?</p>
             <Button 
               onClick={() => window.open(whatsappLink, '_blank')}
-              variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-gray-900"
+              size="lg"
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold"
             >
               <Icon name="MessageCircle" className="mr-2" size={20} />
-              WhatsApp
-            </Button>
-            <Button 
-              onClick={() => window.open('https://vk.com/laakids', '_blank')}
-              variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-gray-900"
-            >
-              ВКонтакте
+              Задать вопрос в WhatsApp
             </Button>
           </div>
-          <p className="text-sm text-gray-500">© 2024 LAA KIDS. Все права защищены.</p>
+        </div>
+      </section>
+
+      <section className="py-12 md:py-16 bg-gradient-to-br from-pink-600 via-purple-600 to-orange-600">
+        <div className="container mx-auto px-4 text-center text-white">
+          <h2 className="text-3xl md:text-5xl font-black mb-4">
+            Готовы подарить ребенку<br/>незабываемый праздник? 🎉
+          </h2>
+          <p className="text-lg md:text-2xl mb-8 opacity-90">
+            Осталось только позвонить или написать!
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              onClick={() => window.location.href = `tel:${whatsappNumber}`}
+              size="lg"
+              className="bg-white text-purple-600 hover:bg-gray-100 font-bold text-lg md:text-xl px-8 md:px-12 py-6 md:py-7 shadow-2xl"
+            >
+              <Icon name="Phone" className="mr-2" size={24} />
+              Позвонить: 8 (950) 827-04-41
+            </Button>
+            <Button 
+              onClick={() => window.open(whatsappLink, '_blank')}
+              size="lg"
+              className="bg-green-500 hover:bg-green-600 text-white font-bold text-lg md:text-xl px-8 md:px-12 py-6 md:py-7 shadow-2xl"
+            >
+              <Icon name="MessageCircle" className="mr-2" size={24} />
+              Написать в WhatsApp
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-gray-900 text-white py-8 md:py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+              <h3 className="text-2xl font-black mb-3 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+                LAA KIDS
+              </h3>
+              <p className="text-gray-400 text-sm">
+                Агентство детских праздников<br/>
+                Работаем по всей Москве с 2019 года
+              </p>
+            </div>
+            <div>
+              <h4 className="font-bold mb-3 text-lg">Контакты</h4>
+              <div className="space-y-2 text-gray-400 text-sm">
+                <div className="flex items-center justify-center md:justify-start gap-2">
+                  <Icon name="Phone" size={16} />
+                  <a href={`tel:${whatsappNumber}`} className="hover:text-white">8 (950) 827-04-41</a>
+                </div>
+                <div className="flex items-center justify-center md:justify-start gap-2">
+                  <Icon name="MessageCircle" size={16} />
+                  <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="hover:text-white">WhatsApp</a>
+                </div>
+                <div className="flex items-center justify-center md:justify-start gap-2">
+                  <Icon name="MapPin" size={16} />
+                  <span>Москва и область</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-bold mb-3 text-lg">График работы</h4>
+              <div className="text-gray-400 text-sm space-y-1">
+                <p>Ежедневно: 9:00 - 21:00</p>
+                <p className="text-green-400 font-semibold mt-2">Звоните прямо сейчас!</p>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-6 text-center text-gray-500 text-sm">
+            <p>© 2024 LAA KIDS. Все права защищены.</p>
+          </div>
         </div>
       </footer>
     </div>

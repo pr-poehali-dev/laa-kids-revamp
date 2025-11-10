@@ -210,7 +210,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="fixed top-0 right-0 left-0 h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 z-[100] animate-pulse"></div>
+      <div className="fixed top-0 right-0 left-0 h-2 bg-gradient-to-r from-primary via-accent to-secondary z-[100] animate-pulse"></div>
       
       <div className="fixed top-4 right-4 z-[90] hidden md:block">
         <Card className="border-4 border-red-500 shadow-2xl bg-white animate-bounce">
@@ -225,34 +225,34 @@ const Index = () => {
       <header className="bg-white shadow-md sticky top-0 z-50 border-b-2 border-purple-200">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <div className="flex flex-col">
-            <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-orange-600">
+            <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-secondary">
               LAA KIDS
             </div>
             <div className="text-[10px] md:text-xs text-gray-600 font-bold">1000+ счастливых праздников 🎉</div>
           </div>
           <div className="flex flex-col items-end gap-1">
-            <a href={`tel:${whatsappNumber}`} className="text-lg md:text-2xl font-black text-purple-600">8 (950) 827-04-41</a>
+            <a href={`tel:${whatsappNumber}`} className="text-base md:text-xl font-black text-primary break-all">8 (950) 827-04-41</a>
             <Badge className="bg-green-500 text-white text-[10px] md:text-xs">Ответим за 30 секунд</Badge>
           </div>
         </div>
       </header>
 
-      <section className="relative bg-gradient-to-br from-pink-100 via-purple-100 to-orange-100 py-8 md:py-16 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-purple-50 via-pink-50 to-cyan-50 py-8 md:py-16 overflow-hidden">
         <div className="container mx-auto px-4 text-center relative z-10">
-          <Badge className="mb-4 text-sm md:text-lg px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white animate-pulse shadow-xl font-black">
+          <Badge className="mb-4 text-xs sm:text-sm md:text-base px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white animate-pulse shadow-xl font-black">
             🔥 ПОСЛЕДНИЕ 3 МЕСТА на декабрь! Акция -3000₽
           </Badge>
           
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 text-gray-900 leading-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black mb-4 text-gray-900 leading-tight">
             Ваш ребенок заслуживает<br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-orange-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-secondary">
               ЛУЧШИЙ праздник в жизни!
             </span>
           </h1>
           
-          <p className="text-lg md:text-2xl text-gray-800 font-bold mb-6">
-            Пока вы отдыхаете с бокалом шампанского —<br/>
-            <span className="text-purple-600">мы создаем воспоминания на всю жизнь ❤️</span>
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-800 font-bold mb-6">
+            Пока вы отдыхаете с бокалом шампанского —<br className="hidden sm:block"/>
+            <span className="text-primary">мы создаем воспоминания на всю жизнь ❤️</span>
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-6 max-w-4xl mx-auto">
@@ -268,7 +268,7 @@ const Index = () => {
             <Button 
               onClick={() => document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' })}
               size="lg"
-              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white text-xl md:text-2xl px-8 md:px-16 py-7 md:py-9 shadow-2xl hover:scale-110 transition-all font-black animate-pulse"
+              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white text-base sm:text-lg md:text-xl px-6 sm:px-8 md:px-12 py-5 sm:py-6 md:py-7 shadow-2xl hover:scale-105 transition-all font-black animate-pulse"
             >
               <Icon name="Gift" className="mr-2" size={32} />
               Забронировать со скидкой -3000₽
@@ -284,10 +284,10 @@ const Index = () => {
 
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-5xl font-black text-center mb-3 text-gray-900">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-center mb-3 text-gray-900">
             Почему родители выбирают нас 💎
           </h2>
-          <p className="text-center text-lg text-gray-600 mb-8 md:mb-12">Мы закрываем ВСЕ страхи при заказе праздника</p>
+          <p className="text-center text-sm sm:text-base md:text-lg text-gray-600 mb-8 md:mb-12 px-4">Мы закрываем ВСЕ страхи при заказе праздника</p>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {painPoints.map((point, idx) => (
@@ -296,8 +296,8 @@ const Index = () => {
                   <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${point.color} flex items-center justify-center mb-4 mx-auto`}>
                     <Icon name={point.icon as any} className="text-white" size={32} />
                   </div>
-                  <CardTitle className="text-center text-lg text-red-600 line-through mb-2">{point.pain}</CardTitle>
-                  <CardDescription className="text-center text-xl font-black text-green-600">
+                  <CardTitle className="text-center text-sm md:text-base text-red-600 line-through mb-2">{point.pain}</CardTitle>
+                  <CardDescription className="text-center text-base md:text-lg font-black text-green-600">
                     ✅ {point.solution}
                   </CardDescription>
                 </CardHeader>
@@ -307,12 +307,12 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-gradient-to-br from-purple-50 to-pink-50">
+      <section className="py-12 md:py-16 bg-gradient-to-br from-purple-50 via-cyan-50 to-pink-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-5xl font-black text-center mb-3 text-gray-900">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-center mb-3 text-gray-900">
             Как проходят наши праздники 📸
           </h2>
-          <p className="text-center text-lg text-purple-600 font-bold mb-8 md:mb-12">Настоящие фото с реальных праздников</p>
+          <p className="text-center text-sm sm:text-base md:text-lg text-primary font-bold mb-8 md:mb-12 px-4">Настоящие фото с реальных праздников</p>
           
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-8">
             {realPhotos.map((photo, idx) => (
@@ -334,10 +334,11 @@ const Index = () => {
             <Button 
               onClick={() => window.open(whatsappLink, '_blank')}
               size="lg"
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-black text-lg"
+              className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white font-black text-sm sm:text-base md:text-lg"
             >
-              <Icon name="Image" className="mr-2" size={24} />
-              Посмотреть еще 50+ фото в WhatsApp
+              <Icon name="Image" className="mr-2" size={20} />
+              <span className="hidden sm:inline">Посмотреть еще 50+ фото в WhatsApp</span>
+              <span className="sm:hidden">Еще 50+ фото</span>
             </Button>
           </div>
         </div>
@@ -394,7 +395,7 @@ const Index = () => {
                       const message = `🎉 Хочу забронировать "${pkg.name}" за ${pkg.price} (скидка ${pkg.savings})!`;
                       window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
                     }}
-                    className={`w-full ${pkg.popular ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700' : 'bg-gradient-to-r from-pink-600 to-orange-600 hover:from-pink-700 hover:to-orange-700'} text-white hover:scale-105 transition-all font-black text-base md:text-lg py-6 md:py-7 shadow-xl`}
+                    className={`w-full ${pkg.popular ? 'bg-gradient-to-r from-primary to-accent hover:opacity-90' : 'bg-gradient-to-r from-secondary to-accent hover:opacity-90'} text-white hover:scale-105 transition-all font-black text-sm sm:text-base md:text-lg py-5 md:py-6 shadow-xl`}
                   >
                     <Icon name="ShoppingCart" className="mr-2" size={20} />
                     Забронировать сейчас
@@ -420,17 +421,17 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="order-form" className="py-12 md:py-16 bg-gradient-to-br from-red-600 via-purple-600 to-orange-600">
+      <section id="order-form" className="py-12 md:py-16 bg-gradient-to-br from-primary via-secondary to-accent">
         <div className="container mx-auto px-4 max-w-2xl">
           <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-10">
             <Badge className="mb-4 text-base px-6 py-3 bg-red-600 text-white animate-pulse mx-auto block w-fit font-black">
               🔥 Осталось {spotsLeft} места! Не упустите!
             </Badge>
             
-            <h2 className="text-3xl md:text-4xl font-black text-center mb-3 text-gray-900">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-center mb-3 text-gray-900">
               Забронируйте праздник мечты! 🎁
             </h2>
-            <p className="text-center text-gray-600 mb-6 text-base md:text-lg font-semibold">
+            <p className="text-center text-gray-600 mb-6 text-sm sm:text-base md:text-lg font-semibold px-4">
               Ответим за 30 секунд • Скидка -3000₽ гарантирована
             </p>
             
@@ -467,10 +468,11 @@ const Index = () => {
               <Button 
                 type="submit"
                 size="lg"
-                className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-black text-xl py-8 shadow-2xl hover:scale-105 transition-all"
+                className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-black text-base sm:text-lg md:text-xl py-6 sm:py-7 md:py-8 shadow-2xl hover:scale-105 transition-all"
               >
-                <Icon name="Send" className="mr-2" size={24} />
-                Отправить заявку в WhatsApp
+                <Icon name="Send" className="mr-2" size={20} />
+                <span className="hidden sm:inline">Отправить заявку в WhatsApp</span>
+                <span className="sm:hidden">Отправить заявку</span>
               </Button>
               <p className="text-xs text-gray-500 text-center">
                 Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
@@ -482,10 +484,11 @@ const Index = () => {
                 onClick={() => window.location.href = `tel:${whatsappNumber}`}
                 size="lg"
                 variant="outline"
-                className="w-full border-2 border-purple-500 text-purple-600 hover:bg-purple-500 hover:text-white font-bold text-lg py-6"
+                className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold text-sm sm:text-base md:text-lg py-5 md:py-6"
               >
-                <Icon name="Phone" className="mr-2" size={24} />
-                Или позвоните: 8 (950) 827-04-41
+                <Icon name="Phone" className="mr-2" size={20} />
+                <span className="hidden sm:inline">Или позвоните: 8 (950) 827-04-41</span>
+                <span className="sm:hidden">Позвонить</span>
               </Button>
               <div className="text-center text-sm text-gray-600 font-semibold">
                 ⚡ Отвечаем с 9:00 до 21:00 ежедневно
@@ -497,7 +500,7 @@ const Index = () => {
 
       <section className="py-12 md:py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-5xl font-black text-center mb-3 text-gray-900">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-center mb-3 text-gray-900">
             Честные отзывы родителей ⭐
           </h2>
           <p className="text-center text-lg text-gray-600 mb-8 md:mb-12 font-semibold">Все отзывы проверены и подтверждены</p>
@@ -544,7 +547,7 @@ const Index = () => {
             <Button 
               onClick={() => window.open(whatsappLink, '_blank')}
               size="lg"
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-black text-lg"
+              className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white font-black text-sm sm:text-base md:text-lg"
             >
               Прочитать все 247 отзывов
             </Button>
@@ -559,17 +562,17 @@ const Index = () => {
           </h2>
           
           <Accordion type="single" collapsible className="space-y-4">
-            <AccordionItem value="item-1" className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-2xl px-6">
-              <AccordionTrigger className="text-left font-black text-lg md:text-xl hover:text-purple-600">
+            <AccordionItem value="item-1" className="bg-gradient-to-r from-purple-50 to-cyan-50 border-2 border-primary/30 rounded-2xl px-4 md:px-6">
+              <AccordionTrigger className="text-left font-black text-sm sm:text-base md:text-lg hover:text-primary">
                 Точно приедете вовремя? Я боюсь опозданий
               </AccordionTrigger>
-              <AccordionContent className="text-gray-700 text-base leading-relaxed font-semibold">
+              <AccordionContent className="text-gray-700 text-sm sm:text-base leading-relaxed font-medium">
                 ДА! Мы приедем на 15 минут РАНЬШЕ указанного времени, чтобы подготовиться. За 5 лет ни одного опоздания. Если вдруг (0.001% шанс) опоздаем — вернем 200% стоимости. Это наша железная гарантия.
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-2" className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-2xl px-6">
-              <AccordionTrigger className="text-left font-black text-lg md:text-xl hover:text-purple-600">
+            <AccordionItem value="item-2" className="bg-gradient-to-r from-purple-50 to-cyan-50 border-2 border-primary/30 rounded-2xl px-4 md:px-6">
+              <AccordionTrigger className="text-left font-black text-sm sm:text-base md:text-lg hover:text-primary">
                 Костюмы правда такие качественные? Не из масс-маркета?
               </AccordionTrigger>
               <AccordionContent className="text-gray-700 text-base leading-relaxed font-semibold">
@@ -628,7 +631,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-12 md:py-20 bg-gradient-to-br from-pink-600 via-purple-600 to-orange-600 relative overflow-hidden">
+      <section className="py-12 md:py-20 bg-gradient-to-br from-primary via-secondary to-accent relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 text-9xl">🎈</div>
           <div className="absolute bottom-10 right-10 text-9xl">🎉</div>
@@ -636,35 +639,37 @@ const Index = () => {
         </div>
         
         <div className="container mx-auto px-4 text-center text-white relative z-10">
-          <Badge className="mb-6 text-lg px-8 py-3 bg-white text-purple-600 font-black animate-bounce">
+          <Badge className="mb-6 text-sm sm:text-base md:text-lg px-6 py-2 md:px-8 md:py-3 bg-white text-primary font-black animate-bounce">
             ⏰ Таймер: {formatTime(timeLeft)} до конца акции
           </Badge>
           
-          <h2 className="text-3xl md:text-6xl font-black mb-6 leading-tight">
-            Подарите ребенку праздник,<br/>
+          <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight px-4">
+            Подарите ребенку праздник,<br className="hidden sm:block"/>
             который он запомнит НАВСЕГДА! 🎉
           </h2>
           
-          <p className="text-xl md:text-3xl mb-8 font-bold">
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 font-bold px-4">
             Осталось {spotsLeft} свободных места в декабре
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8">
             <Button 
               onClick={() => window.open(whatsappLink, '_blank')}
               size="lg"
-              className="bg-white text-purple-600 hover:bg-gray-100 font-black text-xl md:text-2xl px-12 md:px-20 py-8 md:py-10 shadow-2xl hover:scale-110 transition-all"
+              className="bg-white text-primary hover:bg-gray-100 font-black text-base sm:text-lg md:text-xl px-8 sm:px-12 md:px-16 py-6 sm:py-7 md:py-8 shadow-2xl hover:scale-105 transition-all"
             >
-              <Icon name="MessageCircle" className="mr-2" size={32} />
-              Забронировать в WhatsApp
+              <Icon name="MessageCircle" className="mr-2" size={24} />
+              <span className="hidden sm:inline">Забронировать в WhatsApp</span>
+              <span className="sm:hidden">WhatsApp</span>
             </Button>
             <Button 
               onClick={() => window.location.href = `tel:${whatsappNumber}`}
               size="lg"
-              className="bg-green-600 hover:bg-green-700 text-white font-black text-xl md:text-2xl px-12 md:px-20 py-8 md:py-10 shadow-2xl hover:scale-110 transition-all"
+              className="bg-green-600 hover:bg-green-700 text-white font-black text-base sm:text-lg md:text-xl px-8 sm:px-12 md:px-16 py-6 sm:py-7 md:py-8 shadow-2xl hover:scale-105 transition-all"
             >
-              <Icon name="Phone" className="mr-2" size={32} />
-              Позвонить сейчас
+              <Icon name="Phone" className="mr-2" size={24} />
+              <span className="hidden sm:inline">Позвонить сейчас</span>
+              <span className="sm:hidden">Позвонить</span>
             </Button>
           </div>
 

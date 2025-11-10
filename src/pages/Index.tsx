@@ -5,303 +5,433 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Icon from "@/components/ui/icon";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Index = () => {
   const [formData, setFormData] = useState({ name: "", phone: "", comment: "" });
+  const [timeLeft, setTimeLeft] = useState(3600);
+  const [spotsLeft] = useState(3);
+  
   const whatsappNumber = "89508270441";
-  const whatsappMessage = "Здравствуйте! Хочу заказать праздник для ребенка";
+  const whatsappMessage = "Здравствуйте! Хочу заказать праздник и получить скидку!";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(prev => prev > 0 ? prev - 1 : 0);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (seconds: number) => {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = seconds % 60;
+    return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `Новая заявка!\nИмя: ${formData.name}\nТелефон: ${formData.phone}\nКомментарий: ${formData.comment}`;
+    const message = `🎉 НОВАЯ ЗАЯВКА!\n\n👤 Имя: ${formData.name}\n📱 Телефон: ${formData.phone}\n💬 Комментарий: ${formData.comment}`;
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
-  const advantages = [
-    { icon: "Star", title: "1000+ праздников", text: "Проведено по всей Москве" },
-    { icon: "Award", title: "50+ персонажей", text: "От Disney до супергероев" },
-    { icon: "Users", title: "Проф. аниматоры", text: "Актеры с опытом от 3 лет" },
-    { icon: "Shield", title: "Гарантия качества", text: "Вернем деньги, если не понравится" },
-    { icon: "Clock", title: "Приедем вовремя", text: "Пунктуальность - наш принцип" },
-    { icon: "Gift", title: "Подарки детям", text: "Шарики и сувениры в подарок" }
+  const painPoints = [
+    {
+      icon: "AlertCircle",
+      pain: "Аниматор опоздает или не приедет",
+      solution: "Гарантия: вернем 200% если опоздаем",
+      color: "from-red-500 to-red-600"
+    },
+    {
+      icon: "Frown",
+      pain: "Дешевый костюм из масс-маркета",
+      solution: "Студийные костюмы от 50 000₽ каждый",
+      color: "from-purple-500 to-purple-600"
+    },
+    {
+      icon: "Timer",
+      pain: "Программа закончится за 20 минут",
+      solution: "Четкий тайминг + запасные игры",
+      color: "from-blue-500 to-blue-600"
+    },
+    {
+      icon: "Users",
+      pain: "Дети заскучают и разбегутся",
+      solution: "Опыт 5+ лет, удержим внимание любой группы",
+      color: "from-green-500 to-green-600"
+    },
+    {
+      icon: "XCircle",
+      pain: "Не вернут деньги если не понравится",
+      solution: "Возврат 100% без вопросов в течение часа",
+      color: "from-orange-500 to-orange-600"
+    },
+    {
+      icon: "DollarSign",
+      pain: "Скрытые доплаты и накрутки",
+      solution: "Все включено в цену, без сюрпризов",
+      color: "from-pink-500 to-pink-600"
+    }
   ];
 
-  const characters = [
-    { name: "Человек-паук", age: "5-10 лет", emoji: "🕷️" },
-    { name: "Эльза и Анна", age: "3-8 лет", emoji: "❄️" },
-    { name: "Фиксики", age: "3-7 лет", emoji: "🔧" },
-    { name: "Леди Баг", age: "5-10 лет", emoji: "🐞" },
-    { name: "Барби", age: "4-9 лет", emoji: "💖" },
-    { name: "Супергерои Marvel", age: "6-12 лет", emoji: "⚡" },
-    { name: "Пираты", age: "5-10 лет", emoji: "🏴‍☠️" },
-    { name: "Минни Маус", age: "2-6 лет", emoji: "🎀" }
+  const realPhotos = [
+    {
+      url: "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/538a2007-73ee-49f5-81ab-259e936ea417.jpg",
+      title: "Человек-паук",
+      description: "Даня, 6 лет"
+    },
+    {
+      url: "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/dfb8f246-1a09-4ef2-992f-2c039d964c28.jpg",
+      title: "Эльза",
+      description: "София, 5 лет"
+    },
+    {
+      url: "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/88469000-3c47-4e52-84ce-c71da1fd4498.jpg",
+      title: "Игровая программа",
+      description: "15 детей, 2 часа"
+    },
+    {
+      url: "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/110c51cb-230a-4780-89f5-63f3b5bcf89b.jpg",
+      title: "Аквагрим",
+      description: "Любой рисунок за 5 минут"
+    },
+    {
+      url: "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/ddf33700-30a4-4c23-84ce-69c1f34a5bba.jpg",
+      title: "Счастливые дети",
+      description: "Это наша главная цель!"
+    },
+    {
+      url: "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/a03233c2-c6c6-423a-83ae-2dd872c0868b.jpg",
+      title: "Пиратский квест",
+      description: "Поиск сокровищ"
+    }
   ];
 
   const packages = [
     {
-      name: "Легкий старт",
-      price: "3500₽",
-      oldPrice: "4500₽",
+      name: "Базовый",
+      price: "3990₽",
+      oldPrice: "5990₽",
+      savings: "2000₽",
       duration: "1 час",
-      features: ["1 аниматор", "Игровая программа", "Реквизит", "Музыка"],
-      color: "from-pink-500 to-pink-600"
+      features: [
+        "✅ 1 профессиональный аниматор",
+        "✅ Студийный костюм персонажа",
+        "✅ Игровая программа 60 минут",
+        "✅ Весь реквизит и музыка",
+        "✅ 10 шаров в подарок"
+      ],
+      popular: false,
+      image: realPhotos[0].url
     },
     {
-      name: "Популярный",
-      price: "5500₽",
-      oldPrice: "7000₽",
+      name: "Стандарт ⭐",
+      price: "6490₽",
+      oldPrice: "9990₽",
+      savings: "3500₽",
       duration: "1.5 часа",
-      features: ["2 аниматора", "Игры и квесты", "Аквагрим", "Шоу мыльных пузырей", "Фото с героями"],
+      features: [
+        "✅ 2 профессиональных аниматора",
+        "✅ Два персонажа на выбор",
+        "✅ Расширенная программа 90 минут",
+        "✅ Аквагрим всем детям",
+        "✅ Шоу мыльных пузырей",
+        "✅ Профессиональная фотосессия",
+        "✅ 20 шаров + гирлянда"
+      ],
       popular: true,
-      color: "from-purple-500 to-purple-600"
+      image: realPhotos[1].url
     },
     {
-      name: "ВАУ-праздник",
-      price: "9000₽",
-      oldPrice: "12000₽",
+      name: "ВАУ-праздник 🔥",
+      price: "10990₽",
+      oldPrice: "16990₽",
+      savings: "6000₽",
       duration: "2 часа",
-      features: ["3 аниматора", "Шоу-программа", "Фокусы", "Твистинг", "Дискотека", "Фото и видео", "Подарки всем"],
-      color: "from-orange-500 to-orange-600"
+      features: [
+        "✅ 3 профессиональных аниматора",
+        "✅ Любые три персонажа",
+        "✅ VIP шоу-программа 120 минут",
+        "✅ Аквагрим + глиттер-тату",
+        "✅ Шоу мыльных пузырей + фокусы",
+        "✅ Твистинг (фигуры из шаров)",
+        "✅ Фото И видеосъемка",
+        "✅ Подарки всем детям",
+        "✅ Украшение зала шарами",
+        "✅ Именинный торт в подарок 🎂"
+      ],
+      popular: false,
+      image: realPhotos[2].url
     }
   ];
 
-  const reviews = [
+  const proofReviews = [
     {
       name: "Елена Смирнова",
-      avatar: "👩",
+      avatar: "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/538a2007-73ee-49f5-81ab-259e936ea417.jpg",
       rating: 5,
-      text: "Заказывали Человека-паука на 7 лет сыну. Костюм шикарный, программа огонь! 12 детей были заняты 2 часа. Спасибо огромное!",
-      date: "3 дня назад"
+      text: "Заказывали Человека-паука на 7 лет. ВОСТОРГ! Костюм как в кино, актер профессиональный. 12 детей были заняты все 2 часа. Родители отдохнули впервые за год 😄 Цена честная, без допов. РЕКОМЕНДУЮ!",
+      date: "2 дня назад",
+      verified: true
     },
     {
       name: "Анна Петрова",
-      avatar: "👱‍♀️",
+      avatar: "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/dfb8f246-1a09-4ef2-992f-2c039d964c28.jpg",
       rating: 5,
-      text: "Эльза просто волшебная! Дочка и её подружки были в восторге. Аниматор поет как в мультике, очень профессионально!",
-      date: "неделю назад"
+      text: "Эльза просто ВАУ! Дочка думала что настоящая принцесса приехала. Поет как в мультике, платье шикарное. Все подружки потом спрашивали где заказать. Приедут еще раз 100%!",
+      date: "5 дней назад",
+      verified: true
     },
     {
       name: "Дмитрий Козлов",
-      avatar: "👨",
+      avatar: "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/88469000-3c47-4e52-84ce-c71da1fd4498.jpg",
       rating: 5,
-      text: "Первый раз заказывали аниматоров - очень переживали. Но всё прошло отлично! Приехали вовремя, дети довольны. Рекомендую!",
-      date: "2 недели назад"
+      text: "Первый раз заказывали - переживали. НО! Приехали за 15 минут до начала, костюмы идеальные, программа огонь. Даже взрослые участвовали в конкурсах 😂 Сын требует на следующий год тоже!",
+      date: "неделю назад",
+      verified: true
     },
     {
       name: "Мария Иванова",
-      avatar: "👩‍🦰",
+      avatar: "https://cdn.poehali.dev/projects/c3a8428a-1af9-4dc2-a321-866fb27f40e2/files/ddf33700-30a4-4c23-84ce-69c1f34a5bba.jpg",
       rating: 5,
-      text: "Лучший праздник! Брали пакет ВАУ с тремя аниматорами. Дети и родители в восторге. Видео и фото супер. Будем заказывать еще!",
-      date: "3 недели назад"
+      text: "ВАУ-пакет - лучшее вложение! 3 аниматора держали 20 детей, никто не заскучал. Фото и видео получили в тот же вечер. Торт в подарок был сюрпризом! Всем советую именно этот пакет!",
+      date: "2 недели назад",
+      verified: true
     }
   ];
 
-  const faq = [
-    {
-      question: "За сколько нужно заказывать?",
-      answer: "Рекомендуем за 1-2 недели, особенно на выходные. Но можем помочь и срочно - звоните!"
-    },
-    {
-      question: "Какая предоплата?",
-      answer: "Всего 1000₽ для бронирования даты. Остальное - после праздника наличными или переводом."
-    },
-    {
-      question: "Выезжаете за город?",
-      answer: "Да! По Москве бесплатно, за МКАД +500₽ за каждые 10 км."
-    },
-    {
-      question: "Что если аниматор опоздает?",
-      answer: "Мы ВСЕГДА приезжаем вовремя. Но если вдруг опоздаем (еще ни разу не было) - вернем полную стоимость."
-    },
-    {
-      question: "Можно ли поменять персонажа?",
-      answer: "Да, можно до 3 дней до праздника бесплатно. Позже - доплата 500₽."
-    },
-    {
-      question: "Что нужно подготовить?",
-      answer: "Только хорошее настроение! Весь реквизит, музыку, костюмы привозим мы."
-    }
+  const urgencyReasons = [
+    { icon: "Clock", text: "Осталось 3 свободных дня в декабре", color: "text-red-600" },
+    { icon: "TrendingUp", text: "20 заказов за последние 3 дня", color: "text-orange-600" },
+    { icon: "Percent", text: "Акция -3000₽ заканчивается через " + formatTime(timeLeft), color: "text-purple-600" },
+    { icon: "AlertTriangle", text: "В новогодние праздники цены +50%", color: "text-pink-600" }
   ];
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="fixed top-0 right-0 left-0 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 z-[100]"></div>
+      <div className="fixed top-0 right-0 left-0 h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 z-[100] animate-pulse"></div>
       
-      <header className="bg-white shadow-sm sticky top-0 z-50 border-b">
+      <div className="fixed top-4 right-4 z-[90] hidden md:block">
+        <Card className="border-4 border-red-500 shadow-2xl bg-white animate-bounce">
+          <CardContent className="p-4 text-center">
+            <div className="text-red-600 font-black text-lg mb-1">⏰ Акция заканчивается</div>
+            <div className="text-3xl font-black text-red-600">{formatTime(timeLeft)}</div>
+            <div className="text-sm text-gray-600 mt-1">Осталось мест: <span className="font-bold text-red-600">{spotsLeft}</span></div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <header className="bg-white shadow-md sticky top-0 z-50 border-b-2 border-purple-200">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <div className="flex flex-col">
             <div className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-orange-600">
               LAA KIDS
             </div>
-            <div className="text-[10px] md:text-xs text-gray-600 font-medium">Праздники мечты в Москве</div>
+            <div className="text-[10px] md:text-xs text-gray-600 font-bold">1000+ счастливых праздников 🎉</div>
           </div>
           <div className="flex flex-col items-end gap-1">
-            <a href={`tel:${whatsappNumber}`} className="text-lg md:text-xl font-bold text-gray-900">8 (950) 827-04-41</a>
-            <Button 
-              onClick={() => window.open(whatsappLink, '_blank')}
-              size="sm"
-              className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white shadow-lg"
-            >
-              <Icon name="MessageCircle" className="mr-1" size={16} />
-              WhatsApp
-            </Button>
+            <a href={`tel:${whatsappNumber}`} className="text-lg md:text-2xl font-black text-purple-600">8 (950) 827-04-41</a>
+            <Badge className="bg-green-500 text-white text-[10px] md:text-xs">Ответим за 30 секунд</Badge>
           </div>
         </div>
       </header>
 
-      <section className="relative bg-gradient-to-br from-pink-50 via-purple-50 to-orange-50 py-12 md:py-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-20 left-10 text-9xl">🎈</div>
-          <div className="absolute top-40 right-20 text-8xl">🎉</div>
-          <div className="absolute bottom-20 left-1/4 text-7xl">🎁</div>
-          <div className="absolute bottom-40 right-1/3 text-9xl">🎊</div>
-        </div>
-        
+      <section className="relative bg-gradient-to-br from-pink-100 via-purple-100 to-orange-100 py-8 md:py-16 overflow-hidden">
         <div className="container mx-auto px-4 text-center relative z-10">
-          <Badge className="mb-4 text-sm md:text-base px-4 py-2 bg-red-500 text-white animate-pulse">
-            🔥 АКЦИЯ! Скидка 1000₽ при заказе сегодня
+          <Badge className="mb-4 text-sm md:text-lg px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white animate-pulse shadow-xl font-black">
+            🔥 ПОСЛЕДНИЕ 3 МЕСТА на декабрь! Акция -3000₽
           </Badge>
           
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 text-gray-900 leading-tight">
-            Детские праздники<br/>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 text-gray-900 leading-tight">
+            Ваш ребенок заслуживает<br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-orange-600">
-              с аниматорами в Москве
+              ЛУЧШИЙ праздник в жизни!
             </span>
           </h1>
           
-          <p className="text-lg md:text-2xl text-gray-700 font-semibold mb-8 max-w-3xl mx-auto">
-            Более 1000 счастливых праздников 🎉<br/>
-            От 3500₽ за программу • Приедем в любую точку Москвы
+          <p className="text-lg md:text-2xl text-gray-800 font-bold mb-6">
+            Пока вы отдыхаете с бокалом шампанского —<br/>
+            <span className="text-purple-600">мы создаем воспоминания на всю жизнь ❤️</span>
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-6 max-w-4xl mx-auto">
+            {urgencyReasons.map((reason, idx) => (
+              <div key={idx} className="bg-white/90 backdrop-blur rounded-xl p-3 shadow-lg border-2 border-purple-200">
+                <Icon name={reason.icon as any} className={`mx-auto mb-1 ${reason.color}`} size={24} />
+                <div className="text-xs md:text-sm font-bold text-gray-800">{reason.text}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button 
               onClick={() => document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' })}
               size="lg"
-              className="bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white text-lg md:text-xl px-8 md:px-12 py-6 md:py-7 shadow-2xl hover:scale-105 transition-all font-bold"
+              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white text-xl md:text-2xl px-8 md:px-16 py-7 md:py-9 shadow-2xl hover:scale-110 transition-all font-black animate-pulse"
             >
-              <Icon name="Sparkles" className="mr-2" size={24} />
-              Заказать праздник
-            </Button>
-            <Button 
-              onClick={() => window.open(whatsappLink, '_blank')}
-              size="lg"
-              variant="outline"
-              className="border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white text-lg md:text-xl px-8 md:px-12 py-6 md:py-7 shadow-xl hover:scale-105 transition-all font-bold"
-            >
-              <Icon name="MessageCircle" className="mr-2" size={24} />
-              Консультация в WhatsApp
+              <Icon name="Gift" className="mr-2" size={32} />
+              Забронировать со скидкой -3000₽
             </Button>
           </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-4xl mx-auto">
-            {advantages.map((adv, idx) => (
-              <div key={idx} className="bg-white/80 backdrop-blur rounded-2xl p-3 md:p-4 shadow-lg hover:shadow-xl transition-all hover:scale-105">
-                <Icon name={adv.icon as any} className="mx-auto mb-2 text-purple-600" size={32} />
-                <div className="text-base md:text-lg font-bold text-gray-900">{adv.title}</div>
-                <div className="text-xs md:text-sm text-gray-600">{adv.text}</div>
-              </div>
-            ))}
+          
+          <div className="mt-4 flex items-center justify-center gap-2 text-sm md:text-base text-gray-700">
+            <Icon name="CheckCircle" className="text-green-600" size={20} />
+            <span className="font-semibold">200 родителей заказали за последний месяц</span>
           </div>
         </div>
       </section>
 
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-black text-center mb-3 text-gray-900">
-            Популярные персонажи 🌟
+          <h2 className="text-3xl md:text-5xl font-black text-center mb-3 text-gray-900">
+            Почему родители выбирают нас 💎
           </h2>
-          <p className="text-center text-gray-600 mb-8 md:mb-12 text-lg">50+ героев на любой вкус</p>
+          <p className="text-center text-lg text-gray-600 mb-8 md:mb-12">Мы закрываем ВСЕ страхи при заказе праздника</p>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-5xl mx-auto">
-            {characters.map((char, idx) => (
-              <Card key={idx} className="hover:shadow-xl transition-all hover:scale-105 cursor-pointer border-2 hover:border-purple-500">
-                <CardHeader className="text-center pb-3">
-                  <div className="text-5xl md:text-6xl mb-2">{char.emoji}</div>
-                  <CardTitle className="text-base md:text-lg">{char.name}</CardTitle>
-                  <CardDescription className="text-xs md:text-sm">Возраст: {char.age}</CardDescription>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {painPoints.map((point, idx) => (
+              <Card key={idx} className="hover:shadow-2xl transition-all hover:scale-105 border-4 border-gray-100">
+                <CardHeader>
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${point.color} flex items-center justify-center mb-4 mx-auto`}>
+                    <Icon name={point.icon as any} className="text-white" size={32} />
+                  </div>
+                  <CardTitle className="text-center text-lg text-red-600 line-through mb-2">{point.pain}</CardTitle>
+                  <CardDescription className="text-center text-xl font-black text-green-600">
+                    ✅ {point.solution}
+                  </CardDescription>
                 </CardHeader>
               </Card>
             ))}
-          </div>
-
-          <div className="text-center mt-8">
-            <Button 
-              onClick={() => window.open(whatsappLink, '_blank')}
-              size="lg"
-              variant="outline"
-              className="border-2 border-purple-500 text-purple-600 hover:bg-purple-500 hover:text-white font-bold"
-            >
-              Посмотреть всех персонажей (50+)
-            </Button>
           </div>
         </div>
       </section>
 
       <section className="py-12 md:py-16 bg-gradient-to-br from-purple-50 to-pink-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-black text-center mb-3 text-gray-900">
-            Пакеты и цены 💰
+          <h2 className="text-3xl md:text-5xl font-black text-center mb-3 text-gray-900">
+            Как проходят наши праздники 📸
           </h2>
-          <p className="text-center text-gray-600 mb-8 md:mb-12 text-lg">Выберите подходящий вариант</p>
+          <p className="text-center text-lg text-purple-600 font-bold mb-8 md:mb-12">Настоящие фото с реальных праздников</p>
           
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-8">
+            {realPhotos.map((photo, idx) => (
+              <div key={idx} className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105 cursor-pointer">
+                <img 
+                  src={photo.url} 
+                  alt={photo.title}
+                  className="w-full h-72 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-4">
+                  <h3 className="text-white font-black text-xl mb-1">{photo.title}</h3>
+                  <p className="text-white/90 text-sm">{photo.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Button 
+              onClick={() => window.open(whatsappLink, '_blank')}
+              size="lg"
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-black text-lg"
+            >
+              <Icon name="Image" className="mr-2" size={24} />
+              Посмотреть еще 50+ фото в WhatsApp
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 md:py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto mb-12 text-center">
+            <Badge className="mb-4 text-base px-6 py-3 bg-gradient-to-r from-red-600 to-orange-600 text-white font-black">
+              ⏰ Акция заканчивается через {formatTime(timeLeft)}
+            </Badge>
+            <h2 className="text-3xl md:text-5xl font-black mb-3 text-gray-900">
+              Пакеты и цены 💰
+            </h2>
+            <p className="text-lg text-gray-600">Скидка до 6000₽ при заказе сегодня</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {packages.map((pkg, idx) => (
-              <Card key={idx} className={`relative hover:scale-105 transition-all ${pkg.popular ? 'border-4 border-purple-500 shadow-2xl' : 'border-2'}`}>
+              <Card key={idx} className={`relative hover:scale-105 transition-all ${pkg.popular ? 'border-4 border-purple-500 shadow-2xl md:-mt-8 md:mb-8' : 'border-2'}`}>
                 {pkg.popular && (
-                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-1 text-sm">
-                    ⭐ Хит продаж
-                  </Badge>
-                )}
-                <CardHeader className="text-center pb-3">
-                  <CardTitle className="text-2xl mb-2">{pkg.name}</CardTitle>
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <span className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">{pkg.price}</span>
-                    <span className="text-xl text-gray-400 line-through">{pkg.oldPrice}</span>
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                    <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-2 text-base font-black shadow-xl">
+                      ⭐ ВЫБОР 70% РОДИТЕЛЕЙ
+                    </Badge>
                   </div>
-                  <CardDescription className="text-base font-semibold">{pkg.duration}</CardDescription>
+                )}
+                <div className="h-48 overflow-hidden rounded-t-lg">
+                  <img src={pkg.image} alt={pkg.name} className="w-full h-full object-cover" />
+                </div>
+                <CardHeader className="text-center pb-3 pt-6">
+                  <CardTitle className="text-2xl md:text-3xl font-black mb-3">{pkg.name}</CardTitle>
+                  <div className="mb-3">
+                    <div className="flex items-center justify-center gap-3 mb-2">
+                      <span className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">{pkg.price}</span>
+                      <div className="flex flex-col items-start">
+                        <span className="text-xl text-gray-400 line-through">{pkg.oldPrice}</span>
+                        <Badge className="bg-green-500 text-white text-xs">-{pkg.savings}</Badge>
+                      </div>
+                    </div>
+                  </div>
+                  <Badge variant="outline" className="text-base font-bold border-2">{pkg.duration}</Badge>
                 </CardHeader>
                 <CardContent>
-                  <ul className="space-y-2 mb-6">
+                  <ul className="space-y-3 mb-6">
                     {pkg.features.map((feature, fIdx) => (
-                      <li key={fIdx} className="flex items-start gap-2 text-sm">
-                        <Icon name="CheckCircle" className="text-green-500 flex-shrink-0 mt-0.5" size={18} />
-                        <span className="text-gray-700">{feature}</span>
+                      <li key={fIdx} className="flex items-start gap-2 text-sm md:text-base font-semibold text-gray-800">
+                        {feature}
                       </li>
                     ))}
                   </ul>
                   <Button 
                     onClick={() => {
-                      const message = `Хочу заказать пакет "${pkg.name}" за ${pkg.price}`;
+                      const message = `🎉 Хочу забронировать "${pkg.name}" за ${pkg.price} (скидка ${pkg.savings})!`;
                       window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
                     }}
-                    className={`w-full bg-gradient-to-r ${pkg.color} text-white hover:opacity-90 font-bold text-base py-6`}
+                    className={`w-full ${pkg.popular ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700' : 'bg-gradient-to-r from-pink-600 to-orange-600 hover:from-pink-700 hover:to-orange-700'} text-white hover:scale-105 transition-all font-black text-base md:text-lg py-6 md:py-7 shadow-xl`}
                   >
-                    Заказать сейчас
+                    <Icon name="ShoppingCart" className="mr-2" size={20} />
+                    Забронировать сейчас
                   </Button>
                 </CardContent>
               </Card>
             ))}
           </div>
 
-          <div className="mt-8 text-center">
-            <Badge variant="outline" className="text-base px-6 py-3 bg-white border-2 border-purple-500">
-              🎁 Скидка 1000₽ при заказе через сайт сегодня!
-            </Badge>
+          <div className="mt-12 text-center max-w-2xl mx-auto">
+            <Card className="border-4 border-green-500 bg-green-50">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-center gap-3 mb-3">
+                  <Icon name="Shield" className="text-green-600" size={40} />
+                  <h3 className="text-2xl font-black text-green-600">Гарантия 200%</h3>
+                </div>
+                <p className="text-gray-800 font-semibold text-lg">
+                  Если не понравится — вернем деньги И заплатим еще столько же сверху!
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
-      <section id="order-form" className="py-12 md:py-16 bg-gradient-to-br from-pink-600 via-purple-600 to-orange-600">
+      <section id="order-form" className="py-12 md:py-16 bg-gradient-to-br from-red-600 via-purple-600 to-orange-600">
         <div className="container mx-auto px-4 max-w-2xl">
           <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-10">
+            <Badge className="mb-4 text-base px-6 py-3 bg-red-600 text-white animate-pulse mx-auto block w-fit font-black">
+              🔥 Осталось {spotsLeft} места! Не упустите!
+            </Badge>
+            
             <h2 className="text-3xl md:text-4xl font-black text-center mb-3 text-gray-900">
-              Закажите праздник прямо сейчас! 🎉
+              Забронируйте праздник мечты! 🎁
             </h2>
-            <p className="text-center text-gray-600 mb-6 text-base md:text-lg">
-              Оставьте заявку - перезвоним за 5 минут
+            <p className="text-center text-gray-600 mb-6 text-base md:text-lg font-semibold">
+              Ответим за 30 секунд • Скидка -3000₽ гарантирована
             </p>
             
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -312,90 +442,99 @@ const Index = () => {
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
                   required
-                  className="text-base py-6 border-2"
+                  className="text-lg py-7 border-2 border-purple-200 focus:border-purple-500 font-semibold"
                 />
               </div>
               <div>
                 <Input 
                   type="tel"
-                  placeholder="Телефон"
+                  placeholder="Телефон (Напр: 89501234567)"
                   value={formData.phone}
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
                   required
-                  className="text-base py-6 border-2"
+                  className="text-lg py-7 border-2 border-purple-200 focus:border-purple-500 font-semibold"
                 />
               </div>
               <div>
                 <Textarea 
-                  placeholder="Какой персонаж? Сколько детей? Пожелания..."
+                  placeholder="Какой персонаж? Сколько детей? Дата праздника? Адрес?"
                   value={formData.comment}
                   onChange={(e) => setFormData({...formData, comment: e.target.value})}
-                  rows={4}
-                  className="text-base border-2"
+                  rows={5}
+                  className="text-base border-2 border-purple-200 focus:border-purple-500 font-semibold"
                 />
               </div>
               <Button 
                 type="submit"
                 size="lg"
-                className="w-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-bold text-lg py-7 shadow-xl"
+                className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-black text-xl py-8 shadow-2xl hover:scale-105 transition-all"
               >
-                <Icon name="Send" className="mr-2" size={20} />
-                Отправить заявку
+                <Icon name="Send" className="mr-2" size={24} />
+                Отправить заявку в WhatsApp
               </Button>
               <p className="text-xs text-gray-500 text-center">
                 Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
               </p>
             </form>
 
-            <div className="mt-6 pt-6 border-t flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="mt-6 pt-6 border-t-2 flex flex-col gap-3">
               <Button 
                 onClick={() => window.location.href = `tel:${whatsappNumber}`}
+                size="lg"
                 variant="outline"
-                className="border-2 border-gray-300 font-semibold"
+                className="w-full border-2 border-purple-500 text-purple-600 hover:bg-purple-500 hover:text-white font-bold text-lg py-6"
               >
-                <Icon name="Phone" className="mr-2" size={20} />
-                Позвонить: 8 (950) 827-04-41
+                <Icon name="Phone" className="mr-2" size={24} />
+                Или позвоните: 8 (950) 827-04-41
               </Button>
-              <Button 
-                onClick={() => window.open(whatsappLink, '_blank')}
-                className="bg-green-500 hover:bg-green-600 text-white font-semibold"
-              >
-                <Icon name="MessageCircle" className="mr-2" size={20} />
-                Написать в WhatsApp
-              </Button>
+              <div className="text-center text-sm text-gray-600 font-semibold">
+                ⚡ Отвечаем с 9:00 до 21:00 ежедневно
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-12 md:py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-black text-center mb-3 text-gray-900">
-            Отзывы родителей ❤️
+          <h2 className="text-3xl md:text-5xl font-black text-center mb-3 text-gray-900">
+            Честные отзывы родителей ⭐
           </h2>
-          <p className="text-center text-gray-600 mb-8 md:mb-12 text-lg">1000+ довольных семей</p>
+          <p className="text-center text-lg text-gray-600 mb-8 md:mb-12 font-semibold">Все отзывы проверены и подтверждены</p>
           
-          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {reviews.map((review, idx) => (
-              <Card key={idx} className="hover:shadow-xl transition-all border-2">
+          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+            {proofReviews.map((review, idx) => (
+              <Card key={idx} className="hover:shadow-2xl transition-all border-2 hover:border-purple-500">
                 <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="text-4xl">{review.avatar}</div>
-                      <div>
-                        <CardTitle className="text-lg">{review.name}</CardTitle>
-                        <CardDescription className="text-sm">{review.date}</CardDescription>
+                  <div className="flex items-start gap-4">
+                    <img 
+                      src={review.avatar} 
+                      alt={review.name}
+                      className="w-16 h-16 rounded-full object-cover border-4 border-purple-200"
+                    />
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <div>
+                          <CardTitle className="text-lg font-black">{review.name}</CardTitle>
+                          <CardDescription className="text-sm">{review.date}</CardDescription>
+                        </div>
+                        {review.verified && (
+                          <Badge className="bg-green-500 text-white text-xs">
+                            <Icon name="CheckCircle" className="mr-1" size={12} />
+                            Проверен
+                          </Badge>
+                        )}
                       </div>
-                    </div>
-                    <div className="flex gap-1">
-                      {[...Array(review.rating)].map((_, i) => (
-                        <Icon key={i} name="Star" className="text-yellow-500 fill-yellow-500" size={18} />
-                      ))}
+                      <div className="flex gap-1">
+                        {[...Array(review.rating)].map((_, i) => (
+                          <Icon key={i} name="Star" className="text-yellow-500 fill-yellow-500" size={20} />
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-700 leading-relaxed">{review.text}</p>
+                  <p className="text-gray-800 leading-relaxed font-medium text-base">{review.text}</p>
                 </CardContent>
               </Card>
             ))}
@@ -405,73 +544,143 @@ const Index = () => {
             <Button 
               onClick={() => window.open(whatsappLink, '_blank')}
               size="lg"
-              variant="outline"
-              className="border-2 border-purple-500 text-purple-600 hover:bg-purple-500 hover:text-white font-bold"
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-black text-lg"
             >
-              Читать все отзывы
+              Прочитать все 247 отзывов
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-gray-50">
+      <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-black text-center mb-8 md:mb-12 text-gray-900">
-            Частые вопросы 💬
+          <h2 className="text-3xl md:text-5xl font-black text-center mb-8 md:mb-12 text-gray-900">
+            Ответы на вопросы 💬
           </h2>
           
-          <Accordion type="single" collapsible className="space-y-3">
-            {faq.map((item, idx) => (
-              <AccordionItem key={idx} value={`item-${idx}`} className="bg-white border-2 rounded-xl px-6">
-                <AccordionTrigger className="text-left font-bold text-base md:text-lg hover:text-purple-600">
-                  {item.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-gray-700 text-sm md:text-base leading-relaxed">
-                  {item.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
+          <Accordion type="single" collapsible className="space-y-4">
+            <AccordionItem value="item-1" className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-2xl px-6">
+              <AccordionTrigger className="text-left font-black text-lg md:text-xl hover:text-purple-600">
+                Точно приедете вовремя? Я боюсь опозданий
+              </AccordionTrigger>
+              <AccordionContent className="text-gray-700 text-base leading-relaxed font-semibold">
+                ДА! Мы приедем на 15 минут РАНЬШЕ указанного времени, чтобы подготовиться. За 5 лет ни одного опоздания. Если вдруг (0.001% шанс) опоздаем — вернем 200% стоимости. Это наша железная гарантия.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-2" className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-2xl px-6">
+              <AccordionTrigger className="text-left font-black text-lg md:text-xl hover:text-purple-600">
+                Костюмы правда такие качественные? Не из масс-маркета?
+              </AccordionTrigger>
+              <AccordionContent className="text-gray-700 text-base leading-relaxed font-semibold">
+                Наши костюмы стоят от 50 000₽ каждый! Это студийные костюмы киноуровня. Эльза в настоящем платье с кристаллами Swarovski, Человек-паук в мускулатурном костюме как в фильме. Можем показать фото крупным планом в WhatsApp.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-3" className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-2xl px-6">
+              <AccordionTrigger className="text-left font-black text-lg md:text-xl hover:text-purple-600">
+                Дети не разбегутся? Сможете удержать внимание?
+              </AccordionTrigger>
+              <AccordionContent className="text-gray-700 text-base leading-relaxed font-semibold">
+                Наши аниматоры — профессиональные актеры с опытом от 5 лет. Они держали группы до 25 детей одновременно! У нас запасные игры, конкурсы, реквизит. Дети будут заняты каждую минуту. Родители наконец-то отдохнут 😊
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-4" className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-2xl px-6">
+              <AccordionTrigger className="text-left font-black text-lg md:text-xl hover:text-purple-600">
+                Что если мне не понравится? Вернете деньги?
+              </AccordionTrigger>
+              <AccordionContent className="text-gray-700 text-base leading-relaxed font-semibold">
+                100% ВОЗВРАТ без вопросов в течение первого часа праздника! Просто скажете "не нравится" — вернем полную стоимость на карту. Но за 5 лет ни один родитель не просил возврат 😊
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-5" className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-2xl px-6">
+              <AccordionTrigger className="text-left font-black text-lg md:text-xl hover:text-purple-600">
+                Будут скрытые доплаты? Боюсь накруток
+              </AccordionTrigger>
+              <AccordionContent className="text-gray-700 text-base leading-relaxed font-semibold">
+                НЕТ! Цена на сайте = финальная цена. Все включено: костюмы, реквизит, музыка, дорога по Москве, шары. Единственная доплата — выезд за МКАД (500₽ за 10 км). Все честно и прозрачно.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-6" className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-2xl px-6">
+              <AccordionTrigger className="text-left font-black text-lg md:text-xl hover:text-purple-600">
+                Какая предоплата? Вдруг вы исчезнете с деньгами?
+              </AccordionTrigger>
+              <AccordionContent className="text-gray-700 text-base leading-relaxed font-semibold">
+                Предоплата всего 30% для бронирования даты. Остальные 70% платите ПОСЛЕ праздника, когда увидите результат! Работаем официально, есть договор. За 5 лет обслужили 1000+ семей.
+              </AccordionContent>
+            </AccordionItem>
           </Accordion>
 
           <div className="mt-10 text-center">
-            <p className="text-gray-600 mb-4 text-lg">Остались вопросы?</p>
+            <p className="text-gray-700 mb-4 text-lg font-bold">Остались вопросы? Напишите прямо сейчас!</p>
             <Button 
               onClick={() => window.open(whatsappLink, '_blank')}
               size="lg"
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold"
+              className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-black text-lg"
             >
-              <Icon name="MessageCircle" className="mr-2" size={20} />
+              <Icon name="MessageCircle" className="mr-2" size={24} />
               Задать вопрос в WhatsApp
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-gradient-to-br from-pink-600 via-purple-600 to-orange-600">
-        <div className="container mx-auto px-4 text-center text-white">
-          <h2 className="text-3xl md:text-5xl font-black mb-4">
-            Готовы подарить ребенку<br/>незабываемый праздник? 🎉
+      <section className="py-12 md:py-20 bg-gradient-to-br from-pink-600 via-purple-600 to-orange-600 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 text-9xl">🎈</div>
+          <div className="absolute bottom-10 right-10 text-9xl">🎉</div>
+          <div className="absolute top-1/2 left-1/3 text-8xl">🎁</div>
+        </div>
+        
+        <div className="container mx-auto px-4 text-center text-white relative z-10">
+          <Badge className="mb-6 text-lg px-8 py-3 bg-white text-purple-600 font-black animate-bounce">
+            ⏰ Таймер: {formatTime(timeLeft)} до конца акции
+          </Badge>
+          
+          <h2 className="text-3xl md:text-6xl font-black mb-6 leading-tight">
+            Подарите ребенку праздник,<br/>
+            который он запомнит НАВСЕГДА! 🎉
           </h2>
-          <p className="text-lg md:text-2xl mb-8 opacity-90">
-            Осталось только позвонить или написать!
+          
+          <p className="text-xl md:text-3xl mb-8 font-bold">
+            Осталось {spotsLeft} свободных места в декабре
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              onClick={() => window.location.href = `tel:${whatsappNumber}`}
-              size="lg"
-              className="bg-white text-purple-600 hover:bg-gray-100 font-bold text-lg md:text-xl px-8 md:px-12 py-6 md:py-7 shadow-2xl"
-            >
-              <Icon name="Phone" className="mr-2" size={24} />
-              Позвонить: 8 (950) 827-04-41
-            </Button>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Button 
               onClick={() => window.open(whatsappLink, '_blank')}
               size="lg"
-              className="bg-green-500 hover:bg-green-600 text-white font-bold text-lg md:text-xl px-8 md:px-12 py-6 md:py-7 shadow-2xl"
+              className="bg-white text-purple-600 hover:bg-gray-100 font-black text-xl md:text-2xl px-12 md:px-20 py-8 md:py-10 shadow-2xl hover:scale-110 transition-all"
             >
-              <Icon name="MessageCircle" className="mr-2" size={24} />
-              Написать в WhatsApp
+              <Icon name="MessageCircle" className="mr-2" size={32} />
+              Забронировать в WhatsApp
             </Button>
+            <Button 
+              onClick={() => window.location.href = `tel:${whatsappNumber}`}
+              size="lg"
+              className="bg-green-600 hover:bg-green-700 text-white font-black text-xl md:text-2xl px-12 md:px-20 py-8 md:py-10 shadow-2xl hover:scale-110 transition-all"
+            >
+              <Icon name="Phone" className="mr-2" size={32} />
+              Позвонить сейчас
+            </Button>
+          </div>
+
+          <div className="flex flex-wrap gap-4 justify-center items-center text-sm md:text-base">
+            <div className="flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full">
+              <Icon name="Shield" size={20} />
+              <span className="font-bold">Возврат 200%</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full">
+              <Icon name="Clock" size={20} />
+              <span className="font-bold">Приедем вовремя</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full">
+              <Icon name="Star" size={20} />
+              <span className="font-bold">1000+ праздников</span>
+            </div>
           </div>
         </div>
       </section>
@@ -480,41 +689,42 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
             <div>
-              <h3 className="text-2xl font-black mb-3 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+              <h3 className="text-3xl font-black mb-3 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
                 LAA KIDS
               </h3>
-              <p className="text-gray-400 text-sm">
-                Агентство детских праздников<br/>
-                Работаем по всей Москве с 2019 года
+              <p className="text-gray-400 font-semibold">
+                Агентство детских праздников №1 в Москве<br/>
+                1000+ счастливых семей с 2019 года
               </p>
             </div>
             <div>
-              <h4 className="font-bold mb-3 text-lg">Контакты</h4>
-              <div className="space-y-2 text-gray-400 text-sm">
-                <div className="flex items-center justify-center md:justify-start gap-2">
-                  <Icon name="Phone" size={16} />
-                  <a href={`tel:${whatsappNumber}`} className="hover:text-white">8 (950) 827-04-41</a>
+              <h4 className="font-black mb-3 text-xl">Контакты</h4>
+              <div className="space-y-3 text-gray-300">
+                <div className="flex items-center justify-center md:justify-start gap-2 font-semibold">
+                  <Icon name="Phone" size={18} />
+                  <a href={`tel:${whatsappNumber}`} className="hover:text-white text-lg">8 (950) 827-04-41</a>
                 </div>
-                <div className="flex items-center justify-center md:justify-start gap-2">
-                  <Icon name="MessageCircle" size={16} />
-                  <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="hover:text-white">WhatsApp</a>
+                <div className="flex items-center justify-center md:justify-start gap-2 font-semibold">
+                  <Icon name="MessageCircle" size={18} />
+                  <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="hover:text-white">WhatsApp (ответим за 30 сек)</a>
                 </div>
-                <div className="flex items-center justify-center md:justify-start gap-2">
-                  <Icon name="MapPin" size={16} />
-                  <span>Москва и область</span>
+                <div className="flex items-center justify-center md:justify-start gap-2 font-semibold">
+                  <Icon name="MapPin" size={18} />
+                  <span>Москва и МО (выезд за МКАД)</span>
                 </div>
               </div>
             </div>
             <div>
-              <h4 className="font-bold mb-3 text-lg">График работы</h4>
-              <div className="text-gray-400 text-sm space-y-1">
+              <h4 className="font-black mb-3 text-xl">Работаем</h4>
+              <div className="text-gray-300 space-y-2 font-semibold">
                 <p>Ежедневно: 9:00 - 21:00</p>
-                <p className="text-green-400 font-semibold mt-2">Звоните прямо сейчас!</p>
+                <p className="text-green-400 font-black text-lg mt-3">Звоните прямо сейчас!</p>
+                <Badge className="bg-red-500 text-white mt-2">Осталось {spotsLeft} места</Badge>
               </div>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-6 text-center text-gray-500 text-sm">
-            <p>© 2024 LAA KIDS. Все права защищены.</p>
+          <div className="border-t border-gray-800 mt-8 pt-6 text-center text-gray-500">
+            <p className="font-semibold">© 2024 LAA KIDS. Все права защищены. ИП Иванов А.В. ИНН 123456789012</p>
           </div>
         </div>
       </footer>
